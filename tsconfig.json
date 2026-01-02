@@ -1,13 +1,20 @@
 {
-  "extends": "astro/tsconfigs/strict",
-  "include": [".astro/types.d.ts", "**/*"],
-  "exclude": ["dist"],
-  "compilerOptions": {
-    "jsx": "react-jsx",
-    "jsxImportSource": "react",
-    "baseUrl": ".",
+	"compilerOptions": {
+		"experimentalDecorators": true,
+    "useDefineForClassFields": false,
+    "baseUrl": "src",
+		// Add type definitions for our Vite runtime.
+	  "types": ["astro/client"],
     "paths": {
-      "@/*": ["./src/*"]
+      "@config": ["config/*"],
+      "@icons": ["icons/*"],
+      "@lib/*": ["lib/*"],
+      "@utils/*": ["utils/*"],
+      "@components/*": ["components/*"],
+      "@layouts/*": ["layouts/*"],
+      "@assets/*": ["assets/*"],
+      "@pages/*": ["pages/*"],
+      "@styles/*": ["styles/*"]
     }
-  }
+	}
 }

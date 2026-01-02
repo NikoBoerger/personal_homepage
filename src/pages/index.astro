@@ -1,84 +1,92 @@
 ---
-import ProjectSection from "@/components/ProjectSection"
-import PostsSection from "@/components/PostsSection"
-import Timeline from "@/components/Timeline"
-import Avatar from "@/components/Avatar"
-import Layout from "@/layouts/Layout.astro"
-import { HiOutlineArrowDownCircle as DownIcon } from "react-icons/hi2"
-import "@/styles/globals.css"
-import { BIO } from "@/content/bio"
+import { Container, FeatureCard } from '@components/odyssey-theme';
+
+import Layout from '../layouts/Page.astro';
+import HomeHeroSection from '../components/sections/heros/HomeHeroSection.astro';
 ---
 
-<script is:inline>
-  const getThemePreference = () => {
-    if (typeof localStorage !== "undefined" && localStorage.getItem("theme")) {
-      return localStorage.getItem("theme")
-    }
-    return window.matchMedia("(prefers-color-scheme: dark)").matches
-      ? "dark"
-      : "light"
-  }
-
-  const isDark = getThemePreference() === "dark"
-  document.documentElement.classList[isDark ? "add" : "remove"]("dark")
-
-  if (typeof localStorage !== "undefined") {
-    const observer = new MutationObserver(() => {
-      const isDark = document.documentElement.classList.contains("dark")
-      localStorage.setItem("theme", isDark ? "dark" : "light")
-    })
-    observer.observe(document.documentElement, {
-      attributes: true,
-      attributeFilter: ["class"],
-    })
-  }
-</script>
-
 <Layout>
-  <main class="p-4 text-slate-700 dark:text-slate-400">
-    <section class="flex flex-col w-full h-screen justify-center items-center">
-      <p class="max-w-56 text-center">
-        Hello, I'm <strong>Niko</strong>, a fullstack developer from
-        Hamburg
-      </p>
-      <DownIcon className="text-2xl animate-bounce mt-10" />
-    </section>
-    <section class="flex flex-col w-full justify-center items-center gap-28">
-      <h2 class="font-bold">Projects</h2>
-      <ProjectSection client:load />
-    </section>
-    <section
-      class="flex flex-col w-full justify-center items-center gap-28 mt-56"
-    >
-      <h2 class="font-bold">About me</h2>
-      <div class="flex flex-col items-center gap-4 max-w-[500px]">
-        <Avatar src="/linkedin.png" alt="Alejandro Londoño" client:load />
-        <p class="text-center">
-          My name is <strong>Alejandro Londoño</strong>, I started programming
-          in mid-2021 and I currently specialize in web development.
-        </p>
-        <p class="text-center">
-          I am passionate about technology, learning new things, sharing
-          knowledge and creating open source software.
-        </p>
-      </div>
-    </section>
-    <section
-      class="flex flex-col w-full justify-center items-center gap-28 mt-56"
-    >
-      <h2 class="font-bold">Bio</h2>
-      <Timeline content={BIO} />
-    </section>
-    <section
-      class="flex flex-col w-full justify-center items-center gap-28 mt-56"
-    >
-      <h2 class="font-bold">Posts</h2>
-      <PostsSection client:load />
-    </section>
-  </main>
-  <footer>
-    <div class="p-4 text-center text-sm text-slate-500 dark:text-slate-600">
-      © 2025 Niko Börger. All rights reserved.
-    </div>
-  </footer>
+	<HomeHeroSection />
+	<Container>
+		<section class="feature-card__section">
+			<h2>Landing Pages</h2>
+			<p>
+				Use one of our landing pages to jumpstart your website or
+				ad campaign.
+			</p>
+			<div class="feature-card__grid">
+				<FeatureCard href="/landing-pages/landing-1" title="Landing Page 1" imgSrc="/assets/images/home/screenshots/landing-1">
+				</FeatureCard>
+				<FeatureCard href="/landing-pages/landing-2" title="Landing Page 2" imgSrc="/assets/images/home/screenshots/landing-2">
+				</FeatureCard>
+			</div>
+		</section>
+	</Container>
+
+	<Container>
+		<section class="feature-card__section">
+			<h2>Company Pages</h2>
+			<p>
+				Use one of our prebuilt company pages for your about page, contact page,
+				legal pages, blog posts, etc.
+			</p>
+			<div class="feature-card__grid">
+				<FeatureCard href="/company/about" title="About Page" imgSrc="/assets/images/home/screenshots/about">
+				</FeatureCard>
+				<FeatureCard href="/company/contact" title="Contact Page" imgSrc="/assets/images/home/screenshots/contact">
+				</FeatureCard>
+				<FeatureCard href="/blog/" title="Blog Page" imgSrc="/assets/images/home/screenshots/blog">
+				</FeatureCard>
+				<FeatureCard
+					href="/blog/posts/remote-work-mental-health"
+					title="Blog Post"
+          imgSrc="/assets/images/home/screenshots/blog-post"
+				>
+				</FeatureCard>
+				<FeatureCard
+					href="/company/legal"
+					imgSrc="/assets/images/home/screenshots/legal"
+					title="Legal Page"
+				>
+				</FeatureCard>
+			</div>
+		</section>
+	</Container>
+
+	<Container>
+		<section class="feature-card__section">
+			<h2>Theme Pages</h2>
+			<p>Learn more about how to set up and use the Odyssey Theme.</p>
+			<div class="feature-card__grid">
+				<FeatureCard
+					href="/theme/get-started"
+					imgSrc="/assets/images/home/screenshots/get-started"
+					title="Get Started"
+				>
+				</FeatureCard>
+				<FeatureCard
+					href="/theme/style-guide"
+					imgSrc="/assets/images/home/screenshots/style-guide"
+					title="Style Guide"
+				>
+				</FeatureCard>
+			</div>
+		</section>
+	</Container>
 </Layout>
+
+<style>
+	.feature-card__section {
+		margin: var(--section-margin) auto;
+	}
+	.feature-card__grid {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		gap: var(--theme-grid-gap);
+	}
+	@media (max-width: 768px) {
+		.feature-card__grid {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>
