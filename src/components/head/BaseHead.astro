@@ -3,6 +3,7 @@ import settings from '../../config/settings.js';
 import ThemeProvider from '../theme-switcher/ThemeProvider.astro';
 
 import '../../styles/index.css';
+import '../../styles/badge.css';
 
 export interface Props {
 	title?: string;
@@ -52,5 +53,3 @@ const image = new URL(Astro.props.image || '/assets/images/profile_pic.jpg', Ast
     // Place Google Analytics code here.
   }
 </script>
-
-<link rel="stylesheet" href="/src/styles/badge.css" />
