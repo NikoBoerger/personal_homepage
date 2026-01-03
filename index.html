@@ -1,0 +1,168 @@
+<!DOCTYPE html><html lang="en"> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width"><link rel="icon" type="image/png" href="/favicon.png"><!-- Primary Meta Tags --><title>Niko Börger</title><meta name="title" content="Niko Börger"><meta name="description" content="Freiberuflicher Senior Fullstack Developer"><link rel="canonical" href="https://niko-boerger.com/"><!-- Generator --><meta name="generator" content="Astro v4.15.9"><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://niko-boerger.com/"><meta property="og:title" content="Niko Börger"><meta property="og:description" content="Freiberuflicher Senior Fullstack Developer"><meta property="og:image" content="https://niko-boerger.com/assets/images/profile_pic.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://niko-boerger.com/"><meta property="twitter:title" content="Niko Börger"><meta property="twitter:description" content="Freiberuflicher Senior Fullstack Developer"><meta property="twitter:image" content="https://niko-boerger.com/assets/images/profile_pic.jpg"><!-- For Demonstration of the themes --><!-- This is a simple script to check if there is a theme value in local storage. That way the theme stays with you between pages --><script>
+	const doc = document.firstElementChild;
+	const localStorageTheme = localStorage.getItem('theme');
+
+	if (localStorageTheme !== null) {
+		doc.setAttribute('data-theme', localStorageTheme);
+	}
+</script><!-- Google Analytics --><link rel="stylesheet" href="/src/styles/badge.css"><style>.text-and-image__section[data-astro-cid-k22oaszl]{margin:var(--section-margin) auto;min-height:clamp(90vh,100vw,calc(100vh - var(--navbar-height)));display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:1rem}.text-and-image__section--reversed[data-astro-cid-k22oaszl] .text-and-image__text[data-astro-cid-k22oaszl]{order:2}.text-and-image__text[data-astro-cid-k22oaszl]{padding:2rem 0;justify-self:center;max-width:25rem}.text-and-image__image[data-astro-cid-k22oaszl] img{width:100%;height:100%;max-height:80vh;object-fit:cover;border-radius:var(--theme-shape-radius)}@media (max-width: 768px){.text-and-image__section[data-astro-cid-k22oaszl]{margin:2rem auto 0;grid-template-columns:1fr}.text-and-image__text[data-astro-cid-k22oaszl]{padding:2rem 0}}
+</style>
+<link rel="stylesheet" href="/_astro/index.DAi1wNqq.css">
+<link rel="stylesheet" href="/_astro/contact.1G6nUX_n.css"><script type="module">const e="niko",n="boerger.dev";document.getElementById("mail-placeholder").innerHTML=`<a href="mailto:${e}@${n}">${e}@${n}</a>`;const o="+49 174 6098501";document.getElementById("phone-placeholder").innerHTML=`${o}`;
+</script>
+<script>/** @license Copyright 2020 Google LLC (BSD-3-Clause) */
+/** Bundled JS generated from "@astrojs/lit/client-shim.js" */
+var N = Object.defineProperty;
+var i = (t, n) => () => (t && (n = t((t = 0))), n);
+var b = (t, n) => {
+	for (var a in n) N(t, a, { get: n[a], enumerable: !0 });
+};
+function s() {
+	if (d === void 0) {
+		let t = document.createElement('div');
+		(t.innerHTML = '<div><template shadowroot="open" shadowrootmode="open"></template></div>'),
+			(d = !!t.firstElementChild.shadowRoot);
+	}
+	return d;
+}
+var d,
+	m = i(() => {});
+var p,
+	c,
+	f,
+	u = i(() => {
+		(p = (t) => t.parentElement === null),
+			(c = (t) => t.tagName === 'TEMPLATE'),
+			(f = (t) => t.nodeType === Node.ELEMENT_NODE);
+	});
+var h,
+	E = i(() => {
+		m();
+		u();
+		h = (t) => {
+			var n;
+			if (s()) return;
+			let a = [],
+				e = t.firstElementChild;
+			for (; e !== t && e !== null; )
+				if (c(e)) a.push(e), (e = e.content);
+				else if (e.firstElementChild !== null) e = e.firstElementChild;
+				else if (f(e) && e.nextElementSibling !== null) e = e.nextElementSibling;
+				else {
+					let o;
+					for (; e !== t && e !== null; )
+						if (p(e)) {
+							o = a.pop();
+							let r = o.parentElement,
+								l = o.getAttribute('shadowroot');
+							if (((e = o), l === 'open' || l === 'closed')) {
+								let y = o.hasAttribute('shadowrootdelegatesfocus');
+								try {
+									r.attachShadow({ mode: l, delegatesFocus: y }).append(o.content);
+								} catch {}
+							} else o = void 0;
+						} else {
+							let r = e.nextElementSibling;
+							if (r != null) {
+								(e = r), o !== void 0 && o.parentElement.removeChild(o);
+								break;
+							}
+							let l =
+								(n = e.parentElement) === null || n === void 0 ? void 0 : n.nextElementSibling;
+							if (l != null) {
+								(e = l), o !== void 0 && o.parentElement.removeChild(o);
+								break;
+							}
+							(e = e.parentElement), o !== void 0 && (o.parentElement.removeChild(o), (o = void 0));
+						}
+				}
+		};
+	});
+var w = i(() => {
+	E();
+});
+var v = {};
+b(v, { hasNativeDeclarativeShadowRoots: () => s, hydrateShadowRoots: () => h });
+var S = i(() => {
+	m();
+	w();
+});
+async function g() {
+	let { hydrateShadowRoots: t } = await Promise.resolve().then(() => (S(), v));
+	window.addEventListener('DOMContentLoaded', () => t(document.body), { once: true });
+}
+var x = new DOMParser()
+	.parseFromString(
+		'<p><template shadowroot="open" shadowrootmode="open"></template></p>',
+		'text/html',
+		{
+			includeShadowRoots: !0,
+		}
+	)
+	.querySelector('p');
+(!x || !x.shadowRoot) && g();
+</script></head> <body> <a href="#content" data-astro-cid-c7ibh6fj>Skip to main content</a>   <script type="module">
+  const bodyElement = document.querySelector('body');
+  const menuButton = document.querySelector('#menuButton')
+  const navHeader = document.querySelector('#nboergerNavHeader');
+  const menuButtonIconHam = document.querySelector('#menuButtonIconHam');
+  const menuButtonIconClose = document.querySelector('#menuButtonIconClose');
+  let scrollPosition = 0;
+
+  menuButton.addEventListener('click', toggleMenu)
+
+  function toggleMenu() {
+    menuButtonIconHam.toggleAttribute('hidden');
+    menuButtonIconClose.toggleAttribute('hidden');
+    
+    if (navHeader.hasAttribute('mobile-menu-open', true)) {
+      menuButton.title = "Open Main Menu"
+      // unlock scroll position
+      bodyElement.style.removeProperty('overflow');
+      bodyElement.style.removeProperty('position');
+      bodyElement.style.removeProperty('top');
+      bodyElement.style.removeProperty('width');
+      window.scrollTo(0, scrollPosition);
+    } else {
+      menuButton.title = "Close Main Menu"
+      // lock scroll position
+      scrollPosition = window.pageYOffset;
+      bodyElement.style.overflow = 'hidden';
+      bodyElement.style.position = 'fixed';
+      bodyElement.style.top = `-${scrollPosition}px`;
+      bodyElement.style.width = '100%';
+    }
+    
+    navHeader.toggleAttribute('mobile-menu-open');
+  }
+</script> <header id="nboergerNavHeader" class="header--right" data-astro-cid-3hxe222u> <div class="header-logo-menu__container" data-astro-cid-3hxe222u> <button id="menuButton" title="Open Main Menu" data-astro-cid-3hxe222u> <span id="menuButtonIconHam" data-astro-cid-3hxe222u> <svg width="24px" height="24px" viewBox="0 0 24 24" data-astro-cid-3hxe222u data-icon="ic:baseline-menu">  <symbol id="ai:ic:baseline-menu"><path fill="currentColor" d="M3 18h18v-2H3zm0-5h18v-2H3zm0-7v2h18V6z"/></symbol><use xlink:href="#ai:ic:baseline-menu"></use>  </svg> </span> <span id="menuButtonIconClose" hidden data-astro-cid-3hxe222u> <svg width="24px" height="24px" viewBox="0 0 24 24" data-astro-cid-3hxe222u data-icon="ic:baseline-close">  <symbol id="ai:ic:baseline-close"><path fill="currentColor" d="M19 6.41L17.59 5L12 10.59L6.41 5L5 6.41L10.59 12L5 17.59L6.41 19L12 13.41L17.59 19L19 17.59L13.41 12z"/></symbol><use xlink:href="#ai:ic:baseline-close"></use>  </svg> </span> </button> <a class="header-logo__link" href="/" data-astro-cid-3hxe222u> <span> <p class="nboerger-logo" data-astro-cid-tvrurpns>Niko Börger</p>  </span> </a> </div> <div class="header-nav__container" data-astro-cid-3hxe222u>  <nav data-astro-cid-3hxe222u> <ul data-astro-cid-3hxe222u> <li data-astro-cid-3hxe222u><a href="/" data-astro-cid-3hxe222u>Home</a></li><li data-astro-cid-3hxe222u><a href="/contact" data-astro-cid-3hxe222u>Kontakt</a></li> </ul> </nav>  </div> <div class="header-action-item__container" data-astro-cid-3hxe222u>  </div> </header>  <main id="content">   <div id="page">  <div class="content__container " data-astro-cid-swtg25lo>  <section class="text-and-image__section text-and-image__section--reversed" data-astro-cid-k22oaszl> <div class="text-and-image__text" data-astro-cid-k22oaszl> <div> <h1>Niko Börger</h1> <p class="subtitle">Freiberuflicher Senior Fullstack Developer</p> <p class="location">Hamburg, Germany</p> <span class="availability-badge badge badge--yellow">Verfügbar ab voraussichtlich 01.04.2026</span> <div class="tech-badges"> <span class="badge badge--primary">Java / Kotlin</span> <span class="badge badge--primary">TypeScript</span> <span class="badge badge--primary">AWS Cloud</span> <span class="badge badge--primary">Spring</span> <span class="badge badge--primary">Node.js</span> <span class="badge badge--primary">DevOps</span> <span class="badge badge--primary">Microservices</span> <span class="badge badge--primary">RESTful</span> <span class="badge badge--primary">TDD</span> <span class="badge badge--primary">Clean Code</span> </div> </div> <div class="text-and-image__btns" data-astro-cid-k22oaszl>  </div> </div> <div class="text-and-image__image" data-astro-cid-k22oaszl> <picture> <img src="/assets/images/profile_pic.jpg" alt="Astro Odyssee" id="home-hero-image"> </picture> </div> </section>  </div>   <section class="customer-quote__section" data-astro-cid-6idxpsdh> <div class="content__container content__container--narrow" data-astro-cid-swtg25lo>  <blockquote data-astro-cid-6idxpsdh>"One difference between a smart programmer and a professional programmer is that the professional understands that clarity is king. Professionals use their powers for good and write code that others can understand."</blockquote> <p data-astro-cid-6idxpsdh>&mdash; Buch &quot;Clean Code&quot; von Robert C. Martin</p>  </div>  </section>  <div class="content__container " data-astro-cid-swtg25lo>  <section class="three-col-text__section" data-astro-cid-hnfjennp> <div class="three-col-text__column" data-astro-cid-hnfjennp> <div> <h2>Was?</h2> <p>
+Ich verbinde höchste Codequalität mit echter Teamkultur. Ich bin nicht nur Entwickler,
+				ich bin <strong>Entstresser</strong>. Ob Legacy-Monster, chaotisches MVP oder Grüne-Wiese-
+				Projekt: Ich sorge mit Struktur dafür, dass ein Projekt nicht implodiert, sondern
+				erfolgreich skaliert.
+</p> </div>  </div> <div class="three-col-text__column" data-astro-cid-hnfjennp> <div> <h2>Warum?</h2> <p>
+Weil instabile Software Teams ausbremst, Budgets verbrennt und Vertrauen kostet.
+				Ich werde geholt, wenn Projekte ins Stocken geraten, technische Schulden dominieren oder Qualität
+				wieder zur verlässlichen Basis werden muss.
+</p> </div>  </div> <div class="three-col-text__column" data-astro-cid-hnfjennp> <div> <h2>Wie?</h2> <p>
+Mit klaren architektonischen Entscheidungen, hohem Qualitätsanspruch und einer ruhigen,
+				strukturierten Arbeitsweise. Testgetrieben, cloud-native und immer im Sinne des Produkts und des Teams
+				– weniger Chaos, weniger Bugs, weniger Drama.
+</p> </div>  </div> </section>  </div>   <div class="content__container " data-astro-cid-swtg25lo>  <section class="sticky-text-image__section undefined" data-astro-cid-llztnadf> <div class="sticky-text-image__text" data-astro-cid-llztnadf> <div> <h2>Technische Exzellenz von Backend bis Cloud</h2> <h3>Backend</h3> <p>
+Mein Schwerpunkt liegt auf robusten, skalierbaren Backends mit klarer Architektur.
+				In cross-funktionalen DevOps-Teams entwickle ich APIs, Microservices und
+				eventgetriebene Systeme, die stabil laufen, sauber getestet sind und langfristig
+				wartbar bleiben.
+</p> <h3>Frontend</h3> <p>
+Ich bringe umfangreiche Frontend-Erfahrung mit und habe unter anderem verschiedene
+				Seiten auf <a href="https://www.otto.de" target="_blank" rel="noopener noreferrer">OTTO.de</a>
+mit aufgebaut. Dabei habe ich komplexe UIs umgesetzt, die sowohl technisch sauber als auch
+				robust in Produktion liefen.
+</p> <h3>Cloud-Infrastruktur</h3> <p>
+Infrastruktur ist für mich Teil der Software, nicht Beiwerk.
+				In DevOps-Setups automatisiere ich Build-, Test- und Deployment-Prozesse
+				und baue Cloud- und Kubernetes-Umgebungen, die zuverlässig, sicher und
+				beherrschbar sind.
+</p> </div> </div> <div class="sticky-text-image__image" data-astro-cid-llztnadf> <picture> <img src="/assets/images/devops.png" alt="Astro nboerger" loading="lazy"> </picture> </div> </section>  </div>   <div class="content__container " data-astro-cid-swtg25lo>  <section class="cta-card__section" style="--section-bg:var(--theme-surface-2); --section-color:var(--theme-on-surface-2)" data-astro-cid-k64bxv33> <div class="cta-card__container" data-astro-cid-k64bxv33>  <h2>Ihr Partner für individuelle Softwareprojekte</h2> <p>
+Kontaktieren Sie mich gern für ein unverbindliches Erstgespräch.
+</p> <div> <p> <em id="phone-placeholder">[Bitte Javascript aktivieren]</em> • <em id="mail-placeholder">[Bitte Javascript aktivieren]</em> </p> </div>  </div> </section>  </div>     </div>   </main> <footer style="--footer-bg:var(--theme-surface-1); --footer-color:var(--theme-on-surface-1)" data-astro-cid-ofitbb36> <div class="content__container " data-astro-cid-swtg25lo>  <div class="footer-grid__container" data-astro-cid-ofitbb36> <div class="footer-brand__container" data-astro-cid-ofitbb36> <div data-astro-cid-ofitbb36> <p class="nboerger-logo" data-astro-cid-tvrurpns>Niko Börger</p>  </div> <ul class="footer-socials__list" data-astro-cid-ofitbb36> <li class="footer-socials__item" data-astro-cid-ofitbb36> <a href="https://www.linkedin.com/in/niko-boerger/" target="_blank" rel="noopener noreferrer" class="footer-socials__link" title="Open LinkedIn profile" data-astro-cid-ofitbb36> <svg width="24" height="24" viewBox="0 0 24 24" data-astro-cid-ofitbb36 data-icon="mdi:linkedin">  <symbol id="ai:mdi:linkedin"><path fill="currentColor" d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2zm-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93zM6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37z"/></symbol><use xlink:href="#ai:mdi:linkedin"></use>  </svg> </a> </li><li class="footer-socials__item" data-astro-cid-ofitbb36> <a href="https://www.xing.com/profile/Niko_Boerger" target="_blank" rel="noopener noreferrer" class="footer-socials__link" title="Open Xing profile" data-astro-cid-ofitbb36> <svg width="24" height="24" viewBox="0 0 24 24" data-astro-cid-ofitbb36 data-icon="mdi:xing">  <symbol id="ai:mdi:xing"><path d="M4.8 3C3.8 3 3 3.8 3 4.8v14.4c0 1 .8 1.8 1.8 1.8h14.4c1 0 1.8-.8 1.8-1.8V4.8c0-1-.8-1.8-1.8-1.8m-3.13 2h2.04c.12 0 .22.04.26.13c.06.09.06.2 0 .31l-4.47 7.92l2.85 5.2c.06.11.06.22 0 .31c-.05.08-.14.13-.25.13h-2.03c-.31 0-.47-.21-.56-.39l-2.87-5.26l4.49-7.96c.11-.2.24-.39.54-.39M7.09 7.76H9.1c.31 0 .47.2.57.39l1.39 2.42c-.09.14-2.18 3.85-2.18 3.85c-.11.19-.25.39-.56.39H6.3c-.12 0-.21-.05-.26-.14a.413.413 0 0 1 0-.31l2.14-3.79L6.82 8.2c-.05-.11-.07-.2-.01-.31c.05-.08.15-.13.28-.13z" fill="currentColor"/></symbol><use xlink:href="#ai:mdi:xing"></use>  </svg> </a> </li><li class="footer-socials__item" data-astro-cid-ofitbb36> <a href="https://www.freelance.de/Freelancer/279607-Senior-Fullstack-Developer-mit-DevOps-Mindset" target="_blank" rel="noopener noreferrer" class="footer-socials__link" title="Open Freelance.de profile" data-astro-cid-ofitbb36> <img src="/assets/images/freelancede.png" alt="Freelance.de" width="19" height="19" class="footer-socials__imgicon" data-astro-cid-ofitbb36> </a> </li> </ul> </div> <div data-astro-cid-ofitbb36> <p data-astro-cid-ofitbb36><strong data-astro-cid-ofitbb36>Niko Börger</strong></p> <ul class="footer-link__list" data-astro-cid-ofitbb36> <li data-astro-cid-ofitbb36> <a href="/impressum" data-astro-cid-ofitbb36>Impressum</a> </li><li data-astro-cid-ofitbb36> <a href="/contact" data-astro-cid-ofitbb36>Kontakt</a> </li> </ul> </div> </div> <div class="footer-copyright__container" data-astro-cid-ofitbb36>  <p data-astro-cid-ofitbb36>Copyright &copy; 2026 Niko Börger</p> </div>  </div>  </footer>  </body></html>
