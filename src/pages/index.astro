@@ -1,10 +1,7 @@
 ---
-import { Icon } from 'astro-icon/components';
 import {
-	Button,
 	CustomerQuoteSection,
 	ThreeColumnTextSection,
-	YouTubeEmbedSection,
 	StickyTextImageSection,
 	CtaCardSection
 } from '@components/odyssey-theme';
@@ -12,8 +9,8 @@ import Layout from '../layouts/Page.astro';
 import TextAndImageHero from '../components/sections/heros/TextAndImageHero.astro';
 
 const seo = {
-	title: 'Landing Page #1 | Astro Odyssey Theme',
-	description: 'Landing Page #1 | Astro Odyssey Theme'
+	title: 'Niko Börger',
+	description: 'Freiberuflicher Senior Fullstack Developer',
 };
 ---
 
@@ -25,7 +22,7 @@ const seo = {
 		</div>
 		<picture slot="image-container">
 			<img
-				src="/assets/images/landing-1/profile_pic.jpg"
+				src="/assets/images/profile_pic.jpg"
 				alt="Astro Odyssee"
 				id="home-hero-image"
 			/>
@@ -92,8 +89,8 @@ const seo = {
 		</div>
 		<picture slot="image-container">
 			<img
-				src="/assets/images/landing-1/devops.png"
-				alt="Astro Odyssey"
+				src="/assets/images/devops.png"
+				alt="Astro nboerger"
 				loading="lazy"
 			/>
 		</picture>
@@ -114,12 +111,12 @@ const seo = {
 		</div>
 	</CtaCardSection>
 	<script>
-		const user = "niko";
-		const domain = "boerger.dev";
-		document.getElementById("mail-placeholder").innerHTML =
+		const user = 'niko';
+		const domain = 'boerger.dev';
+		document.getElementById('mail-placeholder').innerHTML =
 			`<a href="mailto:${user}@${domain}">${user}@${domain}</a>`;
 
-		const phone = "+49 174 6098501";
-		document.getElementById("phone-placeholder").innerHTML = `${phone}`;
+		const phone = '+49 174 6098501';
+		document.getElementById('phone-placeholder').innerHTML = `${phone}`;
 	</script>
 </Layout>

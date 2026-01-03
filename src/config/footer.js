@@ -22,7 +22,7 @@ export const footerLists = [
 		items: [
 			{
 				title: 'Impressum',
-				slug: '/company/about',
+				slug: '/impressum',
 			},
 			{
 				title: 'Kontakt',

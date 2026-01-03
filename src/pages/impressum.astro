@@ -1,0 +1,66 @@
+---
+import Layout from '../layouts/Page.astro';
+---
+
+<Layout seo={{ title: 'Impressum | Niko Börger', description: 'Impressum und rechtliche Angaben.' }}>
+  <section class="impressum__section">
+    <h1 class="impressum__title">Impressum</h1>
+    <p><strong>Angaben gemäß § 5 TMG</strong></p>
+    <p>
+      Niko Börger<br>
+      Gottfried-Keller-Straße 9<br>
+      22848 Norderstedt<br>
+      Deutschland
+    </p>
+    <p><strong>Kontakt</strong></p>
+    <p>
+      Telefon: <span id="phone-placeholder">[Telefon wird geladen]</span><br>
+      E-Mail: <span id="mail-placeholder">[E-Mail wird geladen]</span>
+    </p>
+    <p><strong>Verantwortlich für den Inhalt nach § 55 Abs. 2 RStV</strong></p>
+    <p>
+      Niko Börger<br>
+      Gottfried-Keller-Straße 9<br>
+      22848 Norderstedt
+    </p>
+    <p><strong>Haftungsausschluss</strong></p>
+    <p>
+      Trotz sorgfältiger inhaltlicher Kontrolle übernehmen wir keine Haftung für die Inhalte externer Links. Für den Inhalt der verlinkten Seiten sind ausschließlich deren Betreiber verantwortlich.
+    </p>
+    <p><strong>Umsatzsteuer-ID</strong></p>
+    <p>
+      Umsatzsteuer-Identifikationsnummer gemäß §27 a Umsatzsteuergesetz: DE335605838
+    </p>
+    <p class="impressum__footer">
+      Dieses Impressum gilt auch für unsere Social-Media-Präsenzen.
+    </p>
+  </section>
+  <div style="height: 3rem;"></div>
+  <script>
+    const user = "niko";
+    const domain = "boerger.dev";
+    document.getElementById("mail-placeholder").innerHTML = `<a href="mailto:${user}@${domain}">${user}@${domain}</a>`;
+    const phone = "+49 174 6098501";
+    document.getElementById("phone-placeholder").innerHTML = `${phone}`;
+  </script>
+  <style>
+    .impressum__section {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 2rem 1rem;
+      background: var(--theme-surface-1);
+      border-radius: 1.5rem;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.04);
+    }
+    .impressum__title {
+      font-size: 2.5rem;
+      margin-bottom: 1.5rem;
+      color: var(--theme-primary);
+    }
+    .impressum__footer {
+      margin-top:2rem;
+      font-size:0.9rem;
+      color:var(--theme-on-surface-2);
+    }
+  </style>
+</Layout>
