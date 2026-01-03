@@ -1,92 +1,125 @@
 ---
-import { Container, FeatureCard } from '@components/odyssey-theme';
-
+import { Icon } from 'astro-icon/components';
+import {
+	Button,
+	CustomerQuoteSection,
+	ThreeColumnTextSection,
+	YouTubeEmbedSection,
+	StickyTextImageSection,
+	CtaCardSection
+} from '@components/odyssey-theme';
 import Layout from '../layouts/Page.astro';
-import HomeHeroSection from '../components/sections/heros/HomeHeroSection.astro';
+import TextAndImageHero from '../components/sections/heros/TextAndImageHero.astro';
+
+const seo = {
+	title: 'Landing Page #1 | Astro Odyssey Theme',
+	description: 'Landing Page #1 | Astro Odyssey Theme'
+};
 ---
 
-<Layout>
-	<HomeHeroSection />
-	<Container>
-		<section class="feature-card__section">
-			<h2>Landing Pages</h2>
-			<p>
-				Use one of our landing pages to jumpstart your website or
-				ad campaign.
-			</p>
-			<div class="feature-card__grid">
-				<FeatureCard href="/landing-pages/landing-1" title="Landing Page 1" imgSrc="/assets/images/home/screenshots/landing-1">
-				</FeatureCard>
-				<FeatureCard href="/landing-pages/landing-2" title="Landing Page 2" imgSrc="/assets/images/home/screenshots/landing-2">
-				</FeatureCard>
-			</div>
-		</section>
-	</Container>
+<Layout {seo}>
+	<TextAndImageHero reversed>
+		<div slot="text-container">
+			<h1>Niko Börger</h1>
+			<p>Freiberuflicher Senior Fullstack Developer</p>
+		</div>
+		<picture slot="image-container">
+			<img
+				src="/assets/images/landing-1/profile_pic.jpg"
+				alt="Astro Odyssee"
+				id="home-hero-image"
+			/>
+		</picture>
+	</TextAndImageHero>
 
-	<Container>
-		<section class="feature-card__section">
-			<h2>Company Pages</h2>
-			<p>
-				Use one of our prebuilt company pages for your about page, contact page,
-				legal pages, blog posts, etc.
-			</p>
-			<div class="feature-card__grid">
-				<FeatureCard href="/company/about" title="About Page" imgSrc="/assets/images/home/screenshots/about">
-				</FeatureCard>
-				<FeatureCard href="/company/contact" title="Contact Page" imgSrc="/assets/images/home/screenshots/contact">
-				</FeatureCard>
-				<FeatureCard href="/blog/" title="Blog Page" imgSrc="/assets/images/home/screenshots/blog">
-				</FeatureCard>
-				<FeatureCard
-					href="/blog/posts/remote-work-mental-health"
-					title="Blog Post"
-          imgSrc="/assets/images/home/screenshots/blog-post"
-				>
-				</FeatureCard>
-				<FeatureCard
-					href="/company/legal"
-					imgSrc="/assets/images/home/screenshots/legal"
-					title="Legal Page"
-				>
-				</FeatureCard>
-			</div>
-		</section>
-	</Container>
+	<CustomerQuoteSection
+		quoteText="One difference between a smart programmer and a professional programmer is that the professional understands that clarity is king. Professionals use their powers for good and write code that others can understand."
+		customerName='Buch "Clean Code" von Robert C. Martin'
+	/>
 
-	<Container>
-		<section class="feature-card__section">
-			<h2>Theme Pages</h2>
-			<p>Learn more about how to set up and use the Odyssey Theme.</p>
-			<div class="feature-card__grid">
-				<FeatureCard
-					href="/theme/get-started"
-					imgSrc="/assets/images/home/screenshots/get-started"
-					title="Get Started"
-				>
-				</FeatureCard>
-				<FeatureCard
-					href="/theme/style-guide"
-					imgSrc="/assets/images/home/screenshots/style-guide"
-					title="Style Guide"
-				>
-				</FeatureCard>
-			</div>
-		</section>
-	</Container>
+	<ThreeColumnTextSection>
+		<div slot="column-1-body">
+			<h2>Was?</h2>
+			<p>
+				Ich verbinde höchste Codequalität mit echter Teamkultur. Ich bin nicht nur Entwickler,
+				ich bin <strong>Entstresser</strong>. Ob Legacy-Monster, chaotisches MVP oder Grüne-Wiese-
+				Projekt: Ich sorge mit Struktur dafür, dass ein Projekt nicht implodiert, sondern
+				erfolgreich skaliert.
+			</p>
+		</div>
+		<div slot="column-2-body">
+			<h2>Warum?</h2>
+			<p>
+				Weil instabile Software Teams ausbremst, Budgets verbrennt und Vertrauen kostet.
+				Ich werde geholt, wenn Projekte ins Stocken geraten, technische Schulden dominieren oder Qualität
+				wieder zur verlässlichen Basis werden muss.
+			</p>
+		</div>
+		<div slot="column-3-body">
+			<h2>Wie?</h2>
+			<p>
+				Mit klaren architektonischen Entscheidungen, hohem Qualitätsanspruch und einer ruhigen,
+				strukturierten Arbeitsweise. Testgetrieben, cloud-native und immer im Sinne des Produkts und des Teams
+				– weniger Chaos, weniger Bugs, weniger Drama.
+			</p>
+		</div>
+	</ThreeColumnTextSection>
+
+	<StickyTextImageSection>
+		<div slot="text-container">
+			<h2>Technische Exzellenz von Backend bis Cloud</h2>
+			<h3>Backend</h3>
+			<p>
+				Mein Schwerpunkt liegt auf robusten, skalierbaren Backends mit klarer Architektur.
+				In cross-funktionalen DevOps-Teams entwickle ich APIs, Microservices und
+				eventgetriebene Systeme, die stabil laufen, sauber getestet sind und langfristig
+				wartbar bleiben.
+			</p>
+			<h3>Frontend</h3>
+			<p>
+				Ich bringe umfangreiche Frontend-Erfahrung mit und habe unter anderem verschiedene
+				Seiten auf <a href="https://www.otto.de" target="_blank" rel="noopener noreferrer">OTTO.de</a>
+				mit aufgebaut. Dabei habe ich komplexe UIs umgesetzt, die sowohl technisch sauber als auch
+				robust in Produktion liefen.
+			</p>
+			<h3>Cloud-Infrastruktur</h3>
+			<p>
+				Infrastruktur ist für mich Teil der Software, nicht Beiwerk.
+				In DevOps-Setups automatisiere ich Build-, Test- und Deployment-Prozesse
+				und baue Cloud- und Kubernetes-Umgebungen, die zuverlässig, sicher und
+				beherrschbar sind.
+			</p>
+		</div>
+		<picture slot="image-container">
+			<img
+				src="/assets/images/landing-1/devops.png"
+				alt="Astro Odyssey"
+				loading="lazy"
+			/>
+		</picture>
+	</StickyTextImageSection>
+
+	<CtaCardSection
+		background="var(--theme-surface-2)"
+		color="var(--theme-on-surface-2)"
+	>
+		<h2>Ihr Partner für individuelle Softwareprojekte</h2>
+		<p>
+			Kontaktieren Sie mich gern für ein unverbindliches Erstgespräch.
+		</p>
+		<div>
+			<p>
+				<em id="phone-placeholder"></em> • <em id="mail-placeholder"></em>
+			</p>
+		</div>
+	</CtaCardSection>
+	<script>
+		const user = "niko";
+		const domain = "boerger.dev";
+		document.getElementById("mail-placeholder").innerHTML =
+			`<a href="mailto:${user}@${domain}">${user}@${domain}</a>`;
+
+		const phone = "+49 174 6098501";
+		document.getElementById("phone-placeholder").innerHTML = `${phone}`;
+	</script>
 </Layout>
-
-<style>
-	.feature-card__section {
-		margin: var(--section-margin) auto;
-	}
-	.feature-card__grid {
-		display: grid;
-		grid-template-columns: repeat(2, 1fr);
-		gap: var(--theme-grid-gap);
-	}
-	@media (max-width: 768px) {
-		.feature-card__grid {
-			grid-template-columns: 1fr;
-		}
-	}
-</style>

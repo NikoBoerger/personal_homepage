@@ -1,6 +1,5 @@
 ---
-import ContactForm from '../../components/forms/ContactForm.astro';
-import Layout from '../../layouts/Page.astro';
+import Layout from '../layouts/Page.astro';
 import { Container } from '@components/odyssey-theme';
 
 const seo = {
@@ -13,34 +12,34 @@ const seo = {
 	<Container>
 		<section class="contact-hero__section">
 			<div class="contact-hero__text-section">
-				<h1>Contact Us</h1>
+				<h2>Ihr Partner für individuelle Softwareprojekte</h2>
 				<p>
-					This is a contact form using Odyssey's form components to create a
-					contact form component. The contact form is setup to use Netlify's
-					form detection; however, it can easily be translated to other popular
-					form services such as Formspree, Getform, Formspark, etc.
+					Sie planen ein anspruchsvolles Softwareprojekt oder benötigen Unterstützung in Ihrem Entwicklungsteam?
+					Ich unterstütze Unternehmen bei der Konzeption, Umsetzung und Weiterentwicklung individueller Softwarelösungen – zuverlässig, strukturiert und auf Augenhöhe.
 				</p>
+				<p>Kontaktieren Sie mich gern für ein unverbindliches Erstgespräch.</p>
 				<div>
 					<p>
-						<em><a href="tel:8008675309">(800) 867-5309</a></em> • <em
-							><a href="mailto:hello@odysseytheme.com">hello@ourcompany.com</a
-							></em
-						>
+						<em id="phone-placeholder"></em> • <em id="mail-placeholder"></em>
 					</p>
 				</div>
 			</div>
-			<div class="col-2__container">
-				<ContactForm />
-			</div>
 		</section>
 	</Container>
+	<script>
+		const user = "niko";
+		const domain = "boerger.dev";
+		document.getElementById("mail-placeholder").innerHTML =
+			`<a href="mailto:${user}@${domain}">${user}@${domain}</a>`;
+
+		const phone = "+49 174 6098501";
+		document.getElementById("phone-placeholder").innerHTML = `${phone}`;
+	</script>
 </Layout>
 
 <style>
 	.contact-hero__section {
 		margin: var(--section-margin) auto;
-		display: grid;
-		grid-template-columns: 1fr 1fr;
 		min-height: calc(90vh - var(--navbar-height));
 		gap: 3rem;
 	}
