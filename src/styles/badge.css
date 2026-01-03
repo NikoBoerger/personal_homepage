@@ -1,0 +1,48 @@
+.badge {
+  display: inline-block;
+  padding: 0.25em 0.75em;
+  border-radius: 1em;
+  font-size: 0.95em;
+  font-weight: 500;
+  margin: 0.15em 0.25em 0.15em 0;
+  background: var(--theme-surface-1, #f3f3f3);
+  color: var(--theme-on-surface-1, #222);
+  letter-spacing: 0.01em;
+  vertical-align: middle;
+  line-height: 1.6;
+  transition: background 0.2s, color 0.2s;
+}
+.badge--primary {
+  background: var(--theme-primary, #3b82f6);
+  color: var(--theme-on-primary, #fff);
+  font-size: 0.75em;
+  padding: 0.12em 0.8em;
+}
+.badge--yellow {
+  background: #ffe066;
+  color: #7c6f00;
+}
+.badge--green {
+  background: #b6f7b0;
+  color: #1a4d1a;
+}
+.badge--red {
+  background: #ffb3b3;
+  color: #7c1a1a;
+}
+.tech-badges {
+  margin-top: 0.5em;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.12em;
+}
+.availability-badge {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+  display: inline-block;
+}
+.location {
+  margin-top: 0.2em;
+  color: var(--theme-on-surface-2, #666);
+  font-size: 1em;
+}

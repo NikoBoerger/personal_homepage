@@ -4,7 +4,7 @@ import { Container } from '@components/odyssey-theme';
 
 const seo = {
 	title: 'Kontakt | Niko Börger',
-	description: 'Kontakt: Freiberuflicher Senior Fullstack Developer',
+	description: 'Kontakt: Freiberuflicher Senior Fullstack Developer'
 };
 ---
 
@@ -15,50 +15,55 @@ const seo = {
 				Ihr Partner für individuelle Softwareprojekte
 			</p>
 			<p>
-				Ich unterstütze Unternehmen bei der Konzeption, Umsetzung und Weiterentwicklung individueller Softwarelösungen – zuverlässig, strukturiert und auf Augenhöhe.</br></br>
+				Ich unterstütze Unternehmen bei der Konzeption, Umsetzung und Weiterentwicklung individueller Softwarelösungen –
+				zuverlässig, strukturiert und auf Augenhöhe.</br></br>
 				Kontaktieren Sie mich gern für ein unverbindliches Erstgespräch.
 			</p>
 			<p class="contact__info">
-				<em id="phone-placeholder"></em> • <em id="mail-placeholder"></em>
+				<em id="phone-placeholder">[Bitte Javascript aktivieren]</em> • <em id="mail-placeholder">[Bitte Javascript
+				aktivieren]</em>
 			</p>
 		</section>
 	</Container>
 	<script>
-		const user = "niko";
-		const domain = "boerger.dev";
-		document.getElementById("mail-placeholder").innerHTML =
+		const user = 'niko';
+		const domain = 'boerger.dev';
+		document.getElementById('mail-placeholder').innerHTML =
 			`<a href="mailto:${user}@${domain}">${user}@${domain}</a>`;
 
-		const phone = "+49 174 6098501";
-		document.getElementById("phone-placeholder").innerHTML = `${phone}`;
+		const phone = '+49 174 6098501';
+		document.getElementById('phone-placeholder').innerHTML = `${phone}`;
 	</script>
 	<style>
-		.contact__section {
-			max-width: 700px;
-			margin: 0 auto 3rem auto;
-			padding: 2rem 1rem;
-			background: var(--theme-surface-1);
-			border-radius: 1.5rem;
-			box-shadow: 0 2px 16px rgba(0,0,0,0.04);
-			display: flex;
-			flex-direction: column;
-			align-items: center;
-		}
-		.contact__title {
-			font-size: 2.5rem;
-			margin-bottom: 0.5rem;
-			color: var(--theme-primary);
-		}
-		.contact__subtitle {
-			font-size: 1.3rem;
-			margin-bottom: 1.5rem;
-			color: var(--theme-on-surface-2);
-			font-weight: 600;
-		}
-		.contact__info {
-			margin-top: 2rem;
-			font-size: 1.1rem;
-			color: var(--theme-on-surface-2);
-		}
+      .contact__section {
+          max-width: 700px;
+          margin: 0 auto 3rem auto;
+          padding: 2rem 1rem;
+          background: var(--theme-surface-1);
+          border-radius: 1.5rem;
+          box-shadow: 0 2px 16px rgba(0, 0, 0, 0.04);
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+      }
+
+      .contact__title {
+          font-size: 2.5rem;
+          margin-bottom: 0.5rem;
+          color: var(--theme-primary);
+      }
+
+      .contact__subtitle {
+          font-size: 1.3rem;
+          margin-bottom: 1.5rem;
+          color: var(--theme-on-surface-2);
+          font-weight: 600;
+      }
+
+      .contact__info {
+          margin-top: 2rem;
+          font-size: 1.1rem;
+          color: var(--theme-on-surface-2);
+      }
 	</style>
 </Layout>
