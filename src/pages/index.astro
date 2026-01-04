@@ -12,6 +12,8 @@ const seo = {
 	title: 'Niko Börger',
 	description: 'Freiberuflicher Senior Fullstack Developer',
 };
+
+const availabilityDateStr = '2026-04-01';
 ---
 
 <Layout {seo}>
@@ -19,7 +21,7 @@ const seo = {
 		<div slot="text-container">
 			<h1>Niko Börger</h1>
 			<p class="subtitle">Freiberuflicher Senior Fullstack Developer<br><span class="location">Hamburg, Germany</span></p>
-			<span class="availability-badge badge badge--green">Verfügbar ab 01.04.2026</span>
+			<span id="availability-badge" class="availability-badge badge" data-availability-date={availabilityDateStr}>vsl. verfügbar ab {availabilityDateStr.split('-').reverse().join('.')}</span>
 			<div class="tech-badges">
 				<span class="badge badge--primary">Java / Kotlin</span>
 				<span class="badge badge--primary">TypeScript</span>
@@ -131,5 +133,24 @@ const seo = {
 
 		const phone = '+49 174 6098501';
 		document.getElementById('phone-placeholder').innerHTML = `${phone}`;
+	</script>
+	<script>
+		const badge = document.getElementById('availability-badge');
+		if (badge) {
+		  const availabilityDateStr = badge.getAttribute('data-availability-date');
+		  const availabilityDate = new Date(availabilityDateStr);
+		  const today = new Date();
+		  const msPerMonth = 30.44 * 24 * 60 * 60 * 1000;
+		  const diffMs = availabilityDate - today;
+		  const diffMonths = diffMs / msPerMonth;
+		  let badgeClass = 'badge--green';
+		  if (diffMonths >= 8) {
+		    badgeClass = 'badge--red';
+		  } else if (diffMonths > 3.5) {
+		    badgeClass = 'badge--yellow';
+		  }
+		  badge.classList.remove('badge--green', 'badge--yellow', 'badge--red');
+		  badge.classList.add(badgeClass);
+		}
 	</script>
 </Layout>
