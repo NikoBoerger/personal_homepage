@@ -23,8 +23,8 @@
   color: #7c6f00;
 }
 .badge--green {
-  background: #b6f7b0;
-  color: #1a4d1a;
+  background: var(--theme-surface-2, #cce6d0);
+  color: #007a3d;
 }
 .badge--red {
   background: #ffb3b3;
@@ -44,5 +44,5 @@
 .location {
   margin-top: 0.2em;
   color: var(--theme-on-surface-2, #666);
-  font-size: 1em;
+  font-size: 0.8em;
 }

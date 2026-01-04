@@ -21,11 +21,19 @@ const {reversed} = Astro.props;
     margin: calc(var(--section-margin) * 2) auto;
     display: grid;
     grid-template-columns: 6fr 4fr;
+    grid-template-areas: "text image";
     position: relative;
     gap: 2rem;
   }
+  .sticky-text-image__text {
+    grid-area: text;
+  }
+  .sticky-text-image__image {
+    grid-area: image;
+  }
   .sticky-text-image__section--reversed {
     grid-template-columns: 4fr 6fr;
+    grid-template-areas: "image text";
   }
   .sticky-text-image__section--reversed .sticky-text-image__text {
     order: 2;
@@ -40,6 +48,15 @@ const {reversed} = Astro.props;
   @media (max-width: 768px) {
     .sticky-text-image__section {
       grid-template-columns: 1fr;
+      grid-template-areas:
+        "image"
+        "text";
+    }
+    .sticky-text-image__section--reversed {
+      grid-template-columns: 1fr;
+      grid-template-areas:
+        "image"
+        "text";
     }
   }
 </style>
