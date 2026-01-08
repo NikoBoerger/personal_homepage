@@ -1,0 +1,199 @@
+---
+---
+
+<div class="language-toggle">
+  <button
+    class="language-toggle__button"
+    id="language-toggle-de"
+    data-lang="de"
+    aria-label="Sprache auf Deutsch ändern"
+  >
+    <span class="language-toggle__flag">🇩🇪</span>
+  </button>
+  <button
+    class="language-toggle__button"
+    id="language-toggle-en"
+    data-lang="en"
+    aria-label="Change language to English"
+  >
+    <span class="language-toggle__flag">🇬🇧</span>
+  </button>
+</div>
+
+<style>
+  .language-toggle {
+    display: flex;
+    align-items: center;
+    gap: 0.15rem;
+    background-color: var(--theme-surface-1, #f0f0f0);
+    border-radius: 1.25rem;
+    padding: 0.15rem 0.2rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease;
+  }
+
+  .language-toggle__button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.75rem;
+    height: 1.4rem;
+    border: none;
+    border-radius: 0.75rem;
+    background-color: transparent;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    -webkit-tap-highlight-color: transparent;
+    padding: 0;
+  }
+
+  .language-toggle__flag {
+    font-size: 1rem;
+    line-height: 1;
+    filter: grayscale(100%) opacity(0.5);
+    transition: filter 0.3s ease;
+    user-select: none;
+  }
+
+  .language-toggle__button:hover .language-toggle__flag {
+    filter: grayscale(50%) opacity(0.75);
+  }
+
+  .language-toggle__button.active {
+    background-color: var(--theme-primary, #0066cc);
+  }
+
+  .language-toggle__button.active .language-toggle__flag {
+    filter: grayscale(0%) opacity(1);
+  }
+
+  .language-toggle__button:focus-visible {
+    outline: 2px solid var(--theme-primary, #0066cc);
+    outline-offset: 2px;
+  }
+
+  @media (max-width: 600px) {
+    .language-toggle {
+      padding: 0.15rem 0.2rem;
+    }
+
+    .language-toggle__button {
+      width: 1.65rem;
+      height: 1.3rem;
+    }
+
+    .language-toggle__flag {
+      font-size: 0.95rem;
+    }
+  }
+</style>
+
+<script>
+  const STORAGE_KEY = 'preferred-language';
+  const DEFAULT_LANG = 'de';
+
+  function initLanguageToggle() {
+    const deButton = document.getElementById('language-toggle-de');
+    const enButton = document.getElementById('language-toggle-en');
+
+    if (!deButton || !enButton) return;
+
+    // Get current language from localStorage or use default
+    const currentLang = localStorage.getItem(STORAGE_KEY) || DEFAULT_LANG;
+
+    // Set initial active state
+    updateActiveButton(currentLang);
+
+    // Apply language to page
+    applyLanguage(currentLang);
+
+    // Add event listeners
+    deButton.addEventListener('click', () => setLanguage('de'));
+    enButton.addEventListener('click', () => setLanguage('en'));
+  }
+
+  function setLanguage(lang: string) {
+    localStorage.setItem(STORAGE_KEY, lang);
+    updateActiveButton(lang);
+    applyLanguage(lang);
+  }
+
+  function updateActiveButton(lang: string) {
+    const deButton = document.getElementById('language-toggle-de');
+    const enButton = document.getElementById('language-toggle-en');
+
+    if (!deButton || !enButton) return;
+
+    deButton.classList.toggle('active', lang === 'de');
+    enButton.classList.toggle('active', lang === 'en');
+  }
+
+  function applyLanguage(lang: string) {
+    document.documentElement.setAttribute('lang', lang);
+
+    // Dispatch custom event so other components can react
+    const event = new CustomEvent('languagechange', { detail: { language: lang } });
+    document.dispatchEvent(event);
+
+    // Update all translatable elements
+    const elements = document.querySelectorAll('[data-i18n-en]');
+    elements.forEach((element) => {
+      const enText = element.getAttribute('data-i18n-en');
+      const deText = element.getAttribute('data-i18n-de');
+
+      if (lang === 'en' && enText) {
+        // Store original German text if not already stored
+        if (!element.hasAttribute('data-i18n-original')) {
+          element.setAttribute('data-i18n-original', element.textContent || '');
+        }
+        element.textContent = enText;
+      } else if (lang === 'de') {
+        // Use data-i18n-de if provided, otherwise restore original
+        if (deText) {
+          element.textContent = deText;
+        } else {
+          const original = element.getAttribute('data-i18n-original');
+          if (original) {
+            element.textContent = original;
+          }
+        }
+      }
+    });
+
+    // Update all translatable HTML content
+    const htmlElements = document.querySelectorAll('[data-i18n-html-en]');
+    htmlElements.forEach((element) => {
+      const enHtml = element.getAttribute('data-i18n-html-en');
+      const deHtml = element.getAttribute('data-i18n-html-de');
+
+      if (lang === 'en' && enHtml) {
+        // Store original German HTML if not already stored
+        if (!element.hasAttribute('data-i18n-html-original')) {
+          element.setAttribute('data-i18n-html-original', element.innerHTML || '');
+        }
+        element.innerHTML = enHtml;
+      } else if (lang === 'de') {
+        // Use data-i18n-html-de if provided, otherwise restore original
+        if (deHtml) {
+          element.innerHTML = deHtml;
+        } else {
+          const original = element.getAttribute('data-i18n-html-original');
+          if (original) {
+            element.innerHTML = original;
+          }
+        }
+      }
+    });
+  }
+
+  // Initialize on page load
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initLanguageToggle);
+  } else {
+    initLanguageToggle();
+  }
+
+  // Re-initialize after navigation (for SPA-like behavior)
+  document.addEventListener('astro:page-load', initLanguageToggle);
+</script>
+

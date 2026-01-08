@@ -41,6 +41,9 @@
   margin-bottom: 0.5em;
   display: inline-block;
 }
+.availability-date {
+  font-weight: 700;
+}
 .location {
   margin-top: 0.2em;
   color: var(--theme-on-surface-2, #666);

@@ -1,27 +1,57 @@
 ---
 import {
-	CustomerQuoteSection,
 	ThreeColumnTextSection,
 	StickyTextImageSection,
 	CtaCardSection
 } from '@components/odyssey-theme';
 import Layout from '../layouts/Page.astro';
 import TextAndImageHero from '../components/sections/heros/TextAndImageHero.astro';
+import TranslatableCustomerQuoteSection from '../components/sections/TranslatableCustomerQuoteSection.astro';
 
 const seo = {
 	title: 'Niko Börger',
-	description: 'Freiberuflicher Senior Fullstack Developer',
+	description: 'Freiberuflicher Senior Fullstack Developer'
 };
 
 const availabilityDateStr = '2026-04-01';
+
+// Format date for German (DD.MM.YYYY)
+const formatDateDE = (dateStr: string) => {
+	const date = new Date(dateStr);
+	return date.toLocaleDateString('de-DE', {
+		month: 'short',
+		day: 'numeric',
+		year: 'numeric'
+	});
+};
+
+// Format date for English (e.g., "Apr 1, 2026")
+const formatDateEN = (dateStr: string) => {
+	const date = new Date(dateStr);
+	return date.toLocaleDateString('en-US', {
+		month: 'short',
+		day: 'numeric',
+		year: 'numeric'
+	});
+};
+
+const availabilityDateDE = formatDateDE(availabilityDateStr);
+const availabilityDateEN = formatDateEN(availabilityDateStr);
 ---
 
 <Layout {seo}>
 	<TextAndImageHero reversed>
 		<div slot="text-container">
 			<h1>Niko Börger</h1>
-			<p class="subtitle">Freiberuflicher Senior Fullstack Developer<br><span class="location">Hamburg, Germany</span></p>
-			<span id="availability-badge" class="availability-badge badge" data-availability-date={availabilityDateStr}>vsl. verfügbar ab {availabilityDateStr.split('-').reverse().join('.')}</span>
+			<p class="subtitle">
+				<span data-i18n-en="Freelance Senior Fullstack Developer">
+					Freiberuflicher Senior Fullstack Developer
+				</span><br>
+				<span class="location">Hamburg, Germany</span>
+			</p>
+		<span id="availability-badge" class="availability-badge badge" data-availability-date={availabilityDateStr}>
+			<span data-i18n-en="Expected availability:">Erwartete Verfügbarkeit:</span> <span class="availability-date" data-i18n-en={availabilityDateEN}>{availabilityDateDE}</span>
+		</span>
 			<div class="tech-badges">
 				<span class="badge badge--primary">Java / Kotlin</span>
 				<span class="badge badge--primary">TypeScript</span>
@@ -44,15 +74,16 @@ const availabilityDateStr = '2026-04-01';
 		</picture>
 	</TextAndImageHero>
 
-	<CustomerQuoteSection
+	<TranslatableCustomerQuoteSection
 		quoteText="One difference between a smart programmer and a professional programmer is that the professional understands that clarity is king. Professionals use their powers for good and write code that others can understand."
 		customerName='Buch "Clean Code" von Robert C. Martin'
+		customerNameEn='Book "Clean Code" by Robert C. Martin'
 	/>
 
 	<ThreeColumnTextSection>
 		<div slot="column-1-body">
-			<h2>Was?</h2>
-			<p>
+			<h2 data-i18n-en="What?">Was?</h2>
+			<p data-i18n-html-en="I combine the highest code quality with genuine team culture. I'm not just a developer, I'm a <strong>de-stressor</strong>. No matter if it’s a legacy monster, a chaotic MVP, or a greenfield project: I provide structure to ensure projects don't implode, but scale successfully.">
 				Ich verbinde höchste Codequalität mit echter Teamkultur. Ich bin nicht nur Entwickler,
 				ich bin <strong>Entstresser</strong>. Ob Legacy-Monster, chaotisches MVP oder Grüne-Wiese-
 				Projekt: Ich sorge mit Struktur dafür, dass ein Projekt nicht implodiert, sondern
@@ -60,16 +91,16 @@ const availabilityDateStr = '2026-04-01';
 			</p>
 		</div>
 		<div slot="column-2-body">
-			<h2>Warum?</h2>
-			<p>
+			<h2 data-i18n-en="Why?">Warum?</h2>
+			<p data-i18n-html-en="Because unstable software slows teams down, burns budgets, and erodes trust. I’m brought in when projects stall, technical debt takes over, or quality needs to become a reliable foundation again.">
 				Weil instabile Software Teams ausbremst, Budgets verbrennt und Vertrauen kostet.
 				Ich werde geholt, wenn Projekte ins Stocken geraten, technische Schulden dominieren oder Qualität
 				wieder zur verlässlichen Basis werden muss.
 			</p>
 		</div>
 		<div slot="column-3-body">
-			<h2>Wie?</h2>
-			<p>
+			<h2 data-i18n-en="How?">Wie?</h2>
+			<p data-i18n-html-en="Through thoughtful architectural decisions, high quality standards, and a calm, structured approach. Test-driven, cloud-native, and always aligned with the product and the team — less chaos, fewer bugs, less drama.">
 				Mit klaren architektonischen Entscheidungen, hohem Qualitätsanspruch und einer ruhigen,
 				strukturierten Arbeitsweise. Testgetrieben, cloud-native und immer im Sinne des Produkts und des Teams
 				– weniger Chaos, weniger Bugs, weniger Drama.
@@ -79,23 +110,25 @@ const availabilityDateStr = '2026-04-01';
 
 	<StickyTextImageSection>
 		<div slot="text-container">
-			<h2>Technische Exzellenz von Backend bis Cloud</h2>
-			<h3>Backend</h3>
-			<p>
+			<h2 data-i18n-en="Technical Excellence from Backend to Cloud">
+				Technische Exzellenz von Backend bis Cloud
+			</h2>
+			<h3 data-i18n-en="Backend">Backend</h3>
+			<p data-i18n-html-en="My focus is on robust, scalable backends with a carefully designed architecture. In cross-functional DevOps teams, I build APIs, microservices, and event-driven systems that run reliably, are thoroughly tested, and remain maintainable over the long term.">
 				Mein Schwerpunkt liegt auf robusten, skalierbaren Backends mit klarer Architektur.
 				In cross-funktionalen DevOps-Teams entwickle ich APIs, Microservices und
 				eventgetriebene Systeme, die stabil laufen, sauber getestet sind und langfristig
 				wartbar bleiben.
 			</p>
-			<h3>Frontend</h3>
-			<p>
+			<h3 data-i18n-en="Frontend">Frontend</h3>
+			<p data-i18n-html-en='I bring extensive frontend experience and have helped build various pages on <a href="https://www.otto.de" target="_blank" rel="noopener noreferrer">OTTO.de</a>. In doing so, I&apos;ve implemented complex UIs that run both technically clean and robust in production.'>
 				Ich bringe umfangreiche Frontend-Erfahrung mit und habe unter anderem verschiedene
 				Seiten auf <a href="https://www.otto.de" target="_blank" rel="noopener noreferrer">OTTO.de</a>
 				mit aufgebaut. Dabei habe ich komplexe UIs umgesetzt, die sowohl technisch sauber als auch
 				robust in Produktion laufen.
 			</p>
-			<h3>Cloud-Infrastruktur</h3>
-			<p>
+			<h3 data-i18n-en="Cloud Infrastructure">Cloud-Infrastruktur</h3>
+			<p data-i18n-html-en="Infrastructure is part of the software for me, not an afterthought. In DevOps setups, I automate build, test, and deployment processes and build cloud and Kubernetes environments that are reliable, secure, and manageable.">
 				Infrastruktur ist für mich Teil der Software, nicht Beiwerk.
 				In DevOps-Setups automatisiere ich Build-, Test- und Deployment-Prozesse
 				und baue Cloud- und Kubernetes-Umgebungen, die zuverlässig, sicher und
@@ -114,42 +147,51 @@ const availabilityDateStr = '2026-04-01';
 		background="var(--theme-surface-2)"
 		color="var(--theme-on-surface-2)"
 	>
-		<h2>Ihr Partner für individuelle Softwareprojekte</h2>
-		<p>
-			Kontaktieren Sie mich gern für ein unverbindliches Erstgespräch.
+		<h2 data-i18n-en="Your Partner for Software Projects">
+			Ihr Partner für Softwareprojekte
+		</h2>
+		<p data-i18n-en="I look forward to hearing from you if you’re looking for a strong partner for your project.">
+			Ich freue mich auf Ihre Nachricht, wenn Sie einen starken Partner für Ihr Projekt suchen.
 		</p>
 		<div>
 			<p>
-				<em id="phone-placeholder">[Bitte Javascript aktivieren]</em> • <em id="mail-placeholder">[Bitte Javascript aktivieren]</em>
+				<em id="phone-placeholder"
+				>[Please enable Javascript]</em> • <em id="mail-placeholder"
+			>[Please enable Javascript]</em>
 			</p>
 		</div>
 	</CtaCardSection>
 	<script>
 		const user = 'niko';
 		const domain = 'boerger.dev';
-		document.getElementById('mail-placeholder').innerHTML =
-			`<a href="mailto:${user}@${domain}">${user}@${domain}</a>`;
+		const mailPlaceholder = document.getElementById('mail-placeholder');
+		if (mailPlaceholder) {
+			mailPlaceholder.innerHTML = `<a href="mailto:${user}@${domain}">${user}@${domain}</a>`;
+		}
 
 		const phone = '+49 174 6098501';
-		document.getElementById('phone-placeholder').innerHTML = `${phone}`;
+		const phonePlaceholder = document.getElementById('phone-placeholder');
+		if (phonePlaceholder) {
+			phonePlaceholder.textContent = phone;
+		}
 	</script>
 	<script>
 		const badge = document.getElementById('availability-badge');
 		if (badge) {
-		  const availabilityDateStr = badge.getAttribute('data-availability-date');
-		  const availabilityDate = new Date(availabilityDateStr);
-		  const today = new Date();
-		  const msPerMonth = 30.44 * 24 * 60 * 60 * 1000;
-		  const diffMs = availabilityDate - today;
-		  const diffMonths = diffMs / msPerMonth;
-		  let badgeClass = 'badge--green';
-		  if (diffMonths >= 8) {
-		    badgeClass = 'badge--red';
-		  } else if (diffMonths > 3.5) {
-		    badgeClass = 'badge--yellow';
-		  }
-		  badge.classList.remove('badge--green', 'badge--yellow', 'badge--red');
-		  badge.classList.add(badgeClass);
+			const availabilityDateStr = badge.getAttribute('data-availability-date');
+			const availabilityDate = new Date(availabilityDateStr);
+			const today = new Date();
+			const msPerMonth = 30.44 * 24 * 60 * 60 * 1000;
+			const diffMs = availabilityDate.getTime() - today.getTime();
+			const diffMonths = diffMs / msPerMonth;
+			let badgeClass = 'badge--green';
+			if (diffMonths >= 6) {
+				badgeClass = 'badge--red';
+			} else if (diffMonths > 3.5) {
+				badgeClass = 'badge--yellow';
+			}
+			badge.classList.remove('badge--green', 'badge--yellow', 'badge--red');
+			badge.classList.add(badgeClass);
 		}
 	</script>
 </Layout>

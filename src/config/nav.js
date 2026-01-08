@@ -6,5 +6,6 @@ export const nav = [
 	{
 		title: 'Kontakt',
 		slug: '/contact',
+		titleEn: 'Contact'
 	},
 ];

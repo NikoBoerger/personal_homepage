@@ -59,7 +59,12 @@ const { navData, rightMenu } = Astro.props;
       {navData && <nav>
         <ul>
           {navData.map(navItem => (
-            (<li><a href={navItem.slug} >{navItem.title}</a></li>)
+            (<li>
+              <a
+                href={navItem.slug}
+                data-i18n-en={navItem.titleEn || navItem.title}
+              >{navItem.title}</a>
+            </li>)
           ))}
         </ul>
       </nav>}
@@ -67,6 +72,10 @@ const { navData, rightMenu } = Astro.props;
   </div>
   <div class="header-action-item__container">
     <slot name="action-item">
+    </slot>
+  </div>
+  <div class="header-language-toggle__container">
+    <slot name="language-toggle">
     </slot>
   </div>
 </header>
@@ -81,7 +90,7 @@ const { navData, rightMenu } = Astro.props;
   }
   header.header--right {
     display: grid;
-    grid-template-columns: 1fr auto auto;
+    grid-template-columns: 1fr auto auto auto;
   }
   .header-logo__link {
     width: fit-content;
@@ -95,6 +104,10 @@ const { navData, rightMenu } = Astro.props;
   }
   .header-action-item__container {
     z-index: 100;
+  }
+  .header-language-toggle__container {
+    z-index: 100;
+    margin-left: 1rem;
   }
   #menuButton {
     outline: none;
@@ -132,6 +145,9 @@ const { navData, rightMenu } = Astro.props;
     #menuButton {
       display: block;  
       z-index: 100;
+    }
+    .header-language-toggle__container {
+      margin-left: 0.5rem;
     }
     .header-nav__container {
       width: 100%;

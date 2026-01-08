@@ -6,33 +6,54 @@ const seo = {
 	title: 'Kontakt | Niko Börger',
 	description: 'Kontakt: Freiberuflicher Senior Fullstack Developer'
 };
+
+// SEO title will be updated by language toggle script
+if (typeof window !== 'undefined') {
+	const savedLang = localStorage.getItem('preferred-language') || 'de';
+	if (savedLang === 'en') {
+		seo.title = 'Contact | Niko Börger';
+		seo.description = 'Contact: Freelance Senior Fullstack Developer';
+	}
+}
 ---
 
 <Layout seo={seo}>
 	<Container>
 		<section class="contact__section">
-			<p class="contact__subtitle">
-				Ihr Partner für individuelle Softwareprojekte
+			<p
+				class="contact__subtitle"
+				data-i18n-en="Your Partner for Software Projects"
+			>
+				Ihr Partner für Softwareprojekte
 			</p>
-			<p>
-				Ich unterstütze Unternehmen bei der Konzeption, Umsetzung und Weiterentwicklung individueller Softwarelösungen –
-				zuverlässig, strukturiert und auf Augenhöhe.</br></br>
-				Kontaktieren Sie mich gern für ein unverbindliches Erstgespräch.
+			<p
+				data-i18n-html-en="With experience in delivering tailor-made software solutions, I help projects succeed from concept to launch.<br><br>I look forward to hearing from you if you’re looking for a strong partner for your project."
+			>
+				Mit meinem Spezialwissen in der Umsetzung maßgeschneiderter Softwarelösungen helfe ich Projekten, vom Konzept bis zum Launch erfolgreich zu sein.</br></br>
+				Ich freue mich auf Ihre Nachricht, wenn Sie einen starken Partner für Ihr Projekt suchen.
 			</p>
 			<p class="contact__info">
-				<em id="phone-placeholder">[Bitte Javascript aktivieren]</em> • <em id="mail-placeholder">[Bitte Javascript
-				aktivieren]</em>
+				<em
+					id="phone-placeholder"
+				>[Please enable Javascript]</em> • <em
+					id="mail-placeholder"
+				>[Please enable Javascript]</em>
 			</p>
 		</section>
 	</Container>
 	<script>
 		const user = 'niko';
 		const domain = 'boerger.dev';
-		document.getElementById('mail-placeholder').innerHTML =
-			`<a href="mailto:${user}@${domain}">${user}@${domain}</a>`;
+		const mailPlaceholder = document.getElementById('mail-placeholder');
+		if (mailPlaceholder) {
+			mailPlaceholder.innerHTML = `<a href="mailto:${user}@${domain}">${user}@${domain}</a>`;
+		}
 
 		const phone = '+49 174 6098501';
-		document.getElementById('phone-placeholder').innerHTML = `${phone}`;
+		const phonePlaceholder = document.getElementById('phone-placeholder');
+		if (phonePlaceholder) {
+			phonePlaceholder.textContent = phone;
+		}
 	</script>
 	<style>
       .contact__section {

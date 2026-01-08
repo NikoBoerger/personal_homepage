@@ -4,17 +4,31 @@ import Layout from '../layouts/Page.astro';
 
 const seo = {
 	title: 'Niko Börger',
-	description: 'Page not found',
+	description: 'Seite nicht gefunden',
 };
+
+// SEO title will be updated by language toggle script
+if (typeof window !== 'undefined') {
+	const savedLang = localStorage.getItem('preferred-language') || 'de';
+	if (savedLang === 'en') {
+		seo.description = 'Page not found';
+	}
+}
 ---
 
 <Layout {seo}>
 	<Container>
 		<TextCardSection>
 			<h1>404</h1>
-			<h2>Page Not Found 👀</h2>
+			<h2 data-i18n-en="Page Not Found 👀">
+				Seite nicht gefunden 👀
+			</h2>
 			<div class="cta-buttons__container">
-				<Button href="/">Return Home</Button>
+				<Button href="/">
+					<span data-i18n-en="Return Home">
+						Zur Startseite
+					</span>
+				</Button>
 			</div>
 		</TextCardSection>
 	</Container>

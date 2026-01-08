@@ -48,7 +48,10 @@ const { footerSocials, footerLists, copyrightName, background, color, showPlug: 
 						<ul class="footer-link__list">
 							{list.items.map((item) => (
 								<li>
-									<a href={item.slug}>{item.title}</a>
+									<a
+										href={item.slug}
+										data-i18n-en={item.titleEn || item.title}
+									>{item.title}</a>
 								</li>
 							))}
 						</ul>

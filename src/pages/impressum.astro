@@ -14,8 +14,8 @@ import Layout from '../layouts/Page.astro';
     </p>
     <p><strong>Kontakt</strong></p>
     <p>
-      Telefon: <span id="phone-placeholder">[Telefon wird geladen]</span><br>
-      E-Mail: <span id="mail-placeholder">[E-Mail wird geladen]</span>
+      Telefon: <span id="phone-placeholder">[Please enable Javascript]</span><br>
+      E-Mail: <span id="mail-placeholder">[Please enable Javascript]</span>
     </p>
     <p><strong>Verantwortlich für den Inhalt nach § 55 Abs. 2 RStV</strong></p>
     <p>
@@ -39,9 +39,15 @@ import Layout from '../layouts/Page.astro';
   <script>
     const user = "niko";
     const domain = "boerger.dev";
-    document.getElementById("mail-placeholder").innerHTML = `<a href="mailto:${user}@${domain}">${user}@${domain}</a>`;
+    const mailPlaceholder = document.getElementById("mail-placeholder");
+    if (mailPlaceholder) {
+      mailPlaceholder.innerHTML = `<a href="mailto:${user}@${domain}">${user}@${domain}</a>`;
+    }
     const phone = "+49 174 6098501";
-    document.getElementById("phone-placeholder").innerHTML = `${phone}`;
+    const phonePlaceholder = document.getElementById("phone-placeholder");
+    if (phonePlaceholder) {
+      phonePlaceholder.textContent = phone;
+    }
   </script>
   <style>
     .impressum__section {
