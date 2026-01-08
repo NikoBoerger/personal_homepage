@@ -1,0 +1,1 @@
+import"./hoisted.DNZikMNj.js";const e="niko",o="boerger.dev",n=document.getElementById("mail-placeholder");n&&(n.innerHTML=`<a href="mailto:${e}@${o}">${e}@${o}</a>`);const l="+49 174 6098501",t=document.getElementById("phone-placeholder");t&&(t.textContent=l);
