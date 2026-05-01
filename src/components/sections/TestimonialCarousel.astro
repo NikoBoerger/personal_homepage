@@ -22,17 +22,10 @@ const { testimonials } = Astro.props as Props;
         <article
           class={`testimonial-carousel__slide${i === 0 ? ' is-active' : ''}`}
         >
-          <blockquote class="testimonial-carousel__quote" data-i18n-en={t.quoteEn}>
-            {t.quoteDe}
-          </blockquote>
+          <blockquote class="testimonial-carousel__quote" data-i18n-en={t.quoteEn}>{t.quoteDe}</blockquote>
           <p class="testimonial-carousel__attribution">
-            <span class="testimonial-carousel__dash" aria-hidden="true">—&nbsp;</span>
-            <span class="testimonial-carousel__name" data-i18n-en={t.nameEn || t.nameDe}>
-              {t.nameDe}
-            </span>
-            <span class="testimonial-carousel__role" data-i18n-en={t.roleEn}>
-              {t.roleDe}
-            </span>
+            <span class="testimonial-carousel__name" data-i18n-en={t.nameEn || t.nameDe}>{t.nameDe}</span>
+            <span class="testimonial-carousel__role" data-i18n-en={t.roleEn}>{t.roleDe}</span>
           </p>
         </article>
       ))}
@@ -110,7 +103,6 @@ const { testimonials } = Astro.props as Props;
   .testimonial-carousel__role {
     display: block;
     margin-top: 0.15rem;
-    margin-left: 1.1rem;
     font-size: 0.95rem;
     opacity: 0.75;
   }
