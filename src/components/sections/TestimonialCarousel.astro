@@ -63,13 +63,11 @@ const { testimonials } = Astro.props as Props;
   }
 
   .testimonial-carousel__slides {
-    position: relative;
-    min-height: 14rem;
+    display: grid;
   }
 
   .testimonial-carousel__slide {
-    position: absolute;
-    inset: 0;
+    grid-area: 1 / 1;
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.5s ease;
@@ -79,7 +77,6 @@ const { testimonials } = Astro.props as Props;
   .testimonial-carousel__slide.is-active {
     opacity: 1;
     visibility: visible;
-    position: relative;
     pointer-events: auto;
   }
 
