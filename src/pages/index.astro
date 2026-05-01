@@ -24,6 +24,13 @@ const testimonials = [
 		roleEn: `Senior Manager Solutions at Opitz Consulting`
 	},
 	{
+		quoteDe: `Niko beeindruckt durch seine schnelle Auffassungsgabe, seinen hohen Qualitätsanspruch und seinen ausgeprägten Teamgeist. Er arbeitet beharrlich und strukturiert an Lösungen, bis diese wirklich überzeugen, und behält dabei auch in komplexen Situationen den Überblick. Durch seine wertschätzende Art trägt er maßgeblich zu einer positiven Zusammenarbeit im Team und mit Stakeholdern bei. Ich würde jederzeit wieder sehr gern mit ihm zusammenarbeiten.`,
+		quoteEn: `Niko impresses through his quick grasp, his high quality bar, and his strong team spirit. He works persistently and methodically on solutions until they are truly convincing, keeping a clear overview even in complex situations. Through his appreciative manner, he contributes substantially to positive collaboration within the team and with stakeholders. I would gladly work with him again at any time.`,
+		nameDe: `Mike Groezinger`,
+		roleDe: `Lead Software Engineer & Solution Architect · 2025`,
+		roleEn: `Lead Software Engineer & Solution Architect · 2025`
+	},
+	{
 		quoteDe: `Niko gehört fachlich wie menschlich zu den starken Entwicklern, mit denen ich zusammenarbeiten durfte. Er hat regelmäßig Verantwortung übernommen, Themen strukturiert vorangetrieben und dabei andere mitgenommen. Ich konnte mich jederzeit auf ihn verlassen. Durch seine hilfsbereite, angenehme Art war er im gesamten Team überaus geschätzt.`,
 		quoteEn: `Niko is one of the strong developers I have worked with, both technically and as a person. He consistently took ownership, drove topics forward in a structured way, and brought others along with him. I could rely on him at any time. His helpful, friendly manner made him highly valued across the whole team.`,
 		nameDe: `Markus Klußmann`,
@@ -38,13 +45,6 @@ const testimonials = [
 		roleEn: `Freelance Senior Fullstack Developer · OTTO project`
 	},
 	{
-		quoteDe: `Ich habe Niko als meinen Mentor erlebt, der komplexe Themen mit Geduld und hoher fachlicher Qualität vermittelt. Seine positive, wertschätzende Art hat jede Session bereichert. Besonders beeindruckt haben mich seine Klarheit in der Kommunikation und sein konsequenter Anspruch an gute Lösungen.`,
-		quoteEn: `I experienced Niko as my mentor, someone who teaches complex topics with patience and deep technical quality. His positive, appreciative manner enriched every session. What impressed me most was his clarity in communication and his consistent commitment to good solutions.`,
-		nameDe: `Zeinab Labaf`,
-		roleDe: `Junior Entwicklerin`,
-		roleEn: `Junior Developer`
-	},
-	{
 		quoteDe: `Niko bringt fachlich und technisch starke Lösungen mit hohem Qualitätsanspruch ein und sorgt durch seine positive Art für ein motivierendes Teamklima. Er ist jederzeit absolut verlässlich und damit sowohl technisch als auch menschlich ein Gewinn für jedes Team.`,
 		quoteEn: `Niko delivers technically strong solutions with a high quality bar and creates a motivating team atmosphere through his positive attitude. He is absolutely reliable at all times. A gain for any team, both technically and as a person.`,
 		nameDe: `Max Dietrich`,
@@ -52,11 +52,11 @@ const testimonials = [
 		roleEn: `Freelance Senior Fullstack Developer · OTTO project`
 	},
 	{
-		quoteDe: `Niko beeindruckt durch seine schnelle Auffassungsgabe, seinen hohen Qualitätsanspruch und seinen ausgeprägten Teamgeist. Er arbeitet beharrlich und strukturiert an Lösungen, bis diese wirklich überzeugen, und behält dabei auch in komplexen Situationen den Überblick. Durch seine wertschätzende Art trägt er maßgeblich zu einer positiven Zusammenarbeit im Team und mit Stakeholdern bei. Ich würde jederzeit wieder sehr gern mit ihm zusammenarbeiten.`,
-		quoteEn: `Niko impresses through his quick grasp, his high quality bar, and his strong team spirit. He works persistently and methodically on solutions until they are truly convincing, keeping a clear overview even in complex situations. Through his appreciative manner, he contributes substantially to positive collaboration within the team and with stakeholders. I would gladly work with him again at any time.`,
-		nameDe: `Mike Groezinger`,
-		roleDe: `Lead Software Engineer & Solution Architect · 2025`,
-		roleEn: `Lead Software Engineer & Solution Architect · 2025`
+		quoteDe: `Ich habe Niko als meinen Mentor erlebt, der komplexe Themen mit Geduld und hoher fachlicher Qualität vermittelt. Seine positive, wertschätzende Art hat jede Session bereichert. Besonders beeindruckt haben mich seine Klarheit in der Kommunikation und sein konsequenter Anspruch an gute Lösungen.`,
+		quoteEn: `I experienced Niko as my mentor, someone who teaches complex topics with patience and deep technical quality. His positive, appreciative manner enriched every session. What impressed me most was his clarity in communication and his consistent commitment to good solutions.`,
+		nameDe: `Zeinab Labaf`,
+		roleDe: `Junior Entwicklerin`,
+		roleEn: `Junior Developer`
 	}
 ];
 
@@ -123,7 +123,7 @@ const availabilityDateEN = formatDateEN(availabilityDateStr);
 
 	<ThreeColumnTextSection>
 		<div slot="column-1-body">
-			<h2 data-i18n-en="What?">Was?</h2>
+			<h2 data-i18n-en="My Standard">Mein Anspruch</h2>
 			<p data-i18n-html-en="I combine the highest quality with genuine team culture. I&apos;m not just a developer — I&apos;m a <strong>de-stresser</strong>. Whether it&apos;s a legacy monster, a chaotic MVP, or a greenfield project: I bring the structure that makes both the product convince and the team behind it.">
 				Ich verbinde höchste Qualität mit echter Teamkultur. Ich bin nicht nur Entwickler,
 				ich bin <strong>Entstresser</strong>. Ob Legacy-Monster, chaotisches MVP oder
@@ -132,19 +132,17 @@ const availabilityDateEN = formatDateEN(availabilityDateStr);
 			</p>
 		</div>
 		<div slot="column-2-body">
-			<h2 data-i18n-en="Why?">Warum?</h2>
-			<p data-i18n-html-en="When to bring me in:<br>When your architecture keeps you up at night. When your team isn&apos;t shipping but groaning. When you&apos;re looking for someone who lives technical excellence and still posts a GIF every now and then.">
-				Wann Sie mich holen sollten:<br>
+			<h2 data-i18n-en="When You Need Me">Wann Sie mich brauchen</h2>
+			<p data-i18n-html-en="When your architecture keeps you up at night. When your team isn&apos;t shipping but groaning. When you&apos;re looking for someone who lives technical excellence and still posts a GIF every now and then.">
 				Wenn Ihre Architektur Sie nachts wach hält. Wenn Ihr Team nicht liefert, sondern stöhnt.
 				Wenn Sie jemanden suchen, der technische Exzellenz lebt und trotzdem auch mal ein GIF postet.
 			</p>
 		</div>
 		<div slot="column-3-body">
-			<h2 data-i18n-en="How?">Wie?</h2>
-			<p data-i18n-html-en="My mission: <strong>Less chaos, fewer bugs, less drama.</strong> In return: modern ways of working, clean architecture, trunk-based development, and more relaxed faces in the daily standup.">
-				Meine Mission: <strong>Weniger Chaos, weniger Bugs, weniger Drama.</strong>
-				Dafür moderne Arbeitsweisen, saubere Architektur, Trunk-Based-Development
-				und mehr entspannte Gesichter im Daily.
+			<h2 data-i18n-en="My Promise">Mein Versprechen</h2>
+			<p data-i18n-html-en="<strong>Less chaos, fewer bugs, less drama.</strong> In return: modern ways of working, clean architecture, and more relaxed faces in the daily standup.">
+				<strong>Weniger Chaos, weniger Bugs, weniger Drama.</strong>
+				Dafür moderne Arbeitsweisen, saubere Architektur und mehr entspannte Gesichter im Daily.
 			</p>
 		</div>
 	</ThreeColumnTextSection>
@@ -171,10 +169,10 @@ const availabilityDateEN = formatDateEN(availabilityDateStr);
 				die zuverlässig, sicher und beherrschbar sind.
 			</p>
 			<h3 data-i18n-en="AI-Driven Engineering">KI-getriebenes Arbeiten</h3>
-			<p data-i18n-html-en="AI isn&apos;t a buzzword for me, it&apos;s a way of working. With Claude Code, GitHub Copilot, and Compound Engineering, I get from idea to production faster — with sharper architecture and tighter feedback loops. I bring that way of working into the team and make sure AI acts not just as a tool but as a lever for better software.">
+			<p data-i18n-html-en="AI isn&apos;t a buzzword for me, it&apos;s a way of working. With Claude Code, GitHub Copilot, and Compound Engineering, I get from idea to production faster. I bring that way of working into the team and make sure AI acts not just as a tool but as a lever for better software.">
 				KI ist für mich kein Buzzword, sondern Arbeitsweise.
 				Mit Claude Code, GitHub Copilot und Compound Engineering komme ich schneller von der Idee
-				zum produktiven System – mit schärferer Architektur und engeren Feedback-Schleifen.
+				zum produktiven System.
 				Ich bringe diese Arbeitsweise ins Team und sorge dafür, dass KI nicht nur als Tool,
 				sondern als Hebel für bessere Software wirkt.
 			</p>

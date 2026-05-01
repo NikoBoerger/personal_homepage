@@ -57,10 +57,14 @@ const { testimonials } = Astro.props as Props;
 
   .testimonial-carousel__slides {
     display: grid;
+    touch-action: pan-y;
   }
 
   .testimonial-carousel__slide {
     grid-area: 1 / 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.5s ease;
@@ -178,7 +182,7 @@ const { testimonials } = Astro.props as Props;
       );
       if (slides.length === 0 || dots.length === 0) return;
 
-      const ADVANCE_INTERVAL_MS = 7000;
+      const ADVANCE_INTERVAL_MS = 15000;
       const prefersReducedMotion =
         typeof window !== 'undefined' &&
         window.matchMedia &&
@@ -240,6 +244,57 @@ const { testimonials } = Astro.props as Props;
         isPaused = false;
         startAuto();
       });
+
+      // Touch swipe — horizontal swipe past the threshold advances or rewinds one slide.
+      // Vertical motion stays as page scroll because we never preventDefault.
+      const SWIPE_THRESHOLD_PX = 50;
+      let touchStartX = 0;
+      let touchStartY = 0;
+      let touchActive = false;
+
+      carousel.addEventListener(
+        'touchstart',
+        (event) => {
+          if (event.touches.length !== 1) return;
+          touchStartX = event.touches[0].clientX;
+          touchStartY = event.touches[0].clientY;
+          touchActive = true;
+          isPaused = true;
+          stopAuto();
+        },
+        { passive: true }
+      );
+
+      carousel.addEventListener(
+        'touchend',
+        (event) => {
+          if (!touchActive) return;
+          touchActive = false;
+          const touch = event.changedTouches[0];
+          const deltaX = touch.clientX - touchStartX;
+          const deltaY = touch.clientY - touchStartY;
+          // Treat as a swipe only when horizontal motion clearly dominates vertical.
+          if (
+            Math.abs(deltaX) > Math.abs(deltaY) &&
+            Math.abs(deltaX) > SWIPE_THRESHOLD_PX
+          ) {
+            setActive(deltaX < 0 ? currentIndex + 1 : currentIndex - 1);
+          }
+          isPaused = false;
+          startAuto();
+        },
+        { passive: true }
+      );
+
+      carousel.addEventListener(
+        'touchcancel',
+        () => {
+          touchActive = false;
+          isPaused = false;
+          startAuto();
+        },
+        { passive: true }
+      );
 
       setActive(0);
       startAuto();
