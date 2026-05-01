@@ -6,7 +6,7 @@ import {
 } from '@components/odyssey-theme';
 import Layout from '../layouts/Page.astro';
 import TextAndImageHero from '../components/sections/heros/TextAndImageHero.astro';
-import TranslatableCustomerQuoteSection from '../components/sections/TranslatableCustomerQuoteSection.astro';
+import TestimonialCarousel from '../components/sections/TestimonialCarousel.astro';
 
 const seo = {
 	title: 'Niko Börger',
@@ -14,6 +14,37 @@ const seo = {
 };
 
 const availabilityDateStr = '2026-07-01';
+
+const testimonials = [
+	{
+		quoteDe: `Niko gehört fachlich wie menschlich zu den starken Entwicklern, mit denen ich zusammenarbeiten durfte. Er hat regelmäßig Verantwortung übernommen, Themen strukturiert vorangetrieben und dabei andere mitgenommen. Ich konnte mich jederzeit auf ihn verlassen. Durch seine hilfsbereite, angenehme Art war er im gesamten Team überaus geschätzt.`,
+		quoteEn: `Niko is one of the strongest developers I have worked with, both technically and as a person. He consistently took ownership, drove topics forward in a structured way, and brought others along with him. I could rely on him at any time. His helpful, friendly manner made him highly valued across the whole team.`,
+		nameDe: `Markus Klußmann`,
+		roleDe: `Technical Lead bei OTTO`,
+		roleEn: `Technical Lead at OTTO`
+	},
+	{
+		quoteDe: `Niko überzeugt nicht nur durch technische Exzellenz und einen hohen Qualitätsanspruch, sondern auch durch seine professionelle, positive Ausstrahlung im Kundenkontakt. Jeder unserer Kunden ist durchweg begeistert von seiner Arbeit und der Zusammenarbeit. Er agiert zuverlässig, lösungsorientiert und mit einem feinen Gespür für die Bedürfnisse unterschiedlicher Stakeholder.`,
+		quoteEn: `Niko stands out not only through technical excellence and a high quality bar, but also through his professional, positive presence in client interactions. Every one of our clients has been consistently impressed with his work and the collaboration. He is reliable, solutions-oriented, and has a fine sense for the needs of different stakeholders.`,
+		nameDe: `Jan Wittern`,
+		roleDe: `Senior Manager Solutions bei Opitz Consulting`,
+		roleEn: `Senior Manager Solutions at Opitz Consulting`
+	},
+	{
+		quoteDe: `In meinem Folgeprojekt merke ich gerade nochmal besonders, wie wichtig es war, jemanden wie dich im Team gehabt zu haben, der für hohe Coding-Qualität gesorgt hat. Wir verlieren hier unglaublich viel Zeit, Nerven und Geld durch schlechte Codequalität. Ich bin froh, dass ich so viel von dir lernen konnte.`,
+		quoteEn: `In my follow-up project, I am noticing again just how important it was to have someone like you on the team — someone who took care of high coding quality. Here we are losing an incredible amount of time, nerves, and money to poor code quality. I am glad I got to learn so much from you.`,
+		nameDe: `Martin Wepner`,
+		roleDe: `Freelance Senior Fullstack Dev · Projekt OTTO (2023–2025)`,
+		roleEn: `Freelance Senior Fullstack Dev · OTTO project (2023–2025)`
+	},
+	{
+		quoteDe: `Ich habe Niko als meinen Mentor erlebt, der komplexe Themen mit Geduld und hoher fachlicher Qualität vermittelt. Seine positive, wertschätzende Art hat jede Session bereichert. Besonders beeindruckt haben mich seine Klarheit in der Kommunikation und sein konsequenter Anspruch an gute Lösungen.`,
+		quoteEn: `I experienced Niko as my mentor — someone who teaches complex topics with patience and deep technical quality. His positive, appreciative manner enriched every session. What impressed me most was his clarity in communication and his consistent commitment to good solutions.`,
+		nameDe: `Zeinab Labaf`,
+		roleDe: `Junior Entwicklerin`,
+		roleEn: `Junior Developer`
+	}
+];
 
 // Format date for German (DD.MM.YYYY)
 const formatDateDE = (dateStr: string) => {
@@ -74,11 +105,7 @@ const availabilityDateEN = formatDateEN(availabilityDateStr);
 		</picture>
 	</TextAndImageHero>
 
-	<TranslatableCustomerQuoteSection
-		quoteText="One difference between a smart programmer and a professional programmer is that the professional understands that clarity is king. Professionals use their powers for good and write code that others can understand."
-		customerName='Buch "Clean Code" von Robert C. Martin'
-		customerNameEn='Book "Clean Code" by Robert C. Martin'
-	/>
+	<TestimonialCarousel testimonials={testimonials} />
 
 	<ThreeColumnTextSection>
 		<div slot="column-1-body">

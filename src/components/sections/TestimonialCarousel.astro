@@ -1,0 +1,268 @@
+---
+interface Testimonial {
+  quoteDe: string;
+  quoteEn: string;
+  nameDe: string;
+  nameEn?: string;
+  roleDe: string;
+  roleEn: string;
+}
+
+interface Props {
+  testimonials: Testimonial[];
+}
+
+const { testimonials } = Astro.props as Props;
+---
+
+<section class="testimonial-carousel" aria-roledescription="carousel">
+  <div class="testimonial-carousel__inner">
+    <div class="testimonial-carousel__slides" aria-live="polite">
+      {testimonials.map((t, i) => (
+        <article
+          class={`testimonial-carousel__slide${i === 0 ? ' is-active' : ''}`}
+          data-slide-index={i}
+        >
+          <blockquote class="testimonial-carousel__quote" data-i18n-en={t.quoteEn}>
+            {t.quoteDe}
+          </blockquote>
+          <p class="testimonial-carousel__attribution">
+            <span class="testimonial-carousel__dash" aria-hidden="true">—&nbsp;</span>
+            <span class="testimonial-carousel__name" data-i18n-en={t.nameEn || t.nameDe}>
+              {t.nameDe}
+            </span>
+            <span class="testimonial-carousel__role" data-i18n-en={t.roleEn}>
+              {t.roleDe}
+            </span>
+          </p>
+        </article>
+      ))}
+    </div>
+    <div class="testimonial-carousel__dots" role="tablist" aria-label="Testimonials">
+      {testimonials.map((_, i) => (
+        <button
+          type="button"
+          class={`testimonial-carousel__dot${i === 0 ? ' is-active' : ''}`}
+          data-slide-target={i}
+          aria-label={`Show testimonial ${i + 1} of ${testimonials.length}`}
+        ></button>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .testimonial-carousel {
+    margin: calc(var(--section-margin) * 2) auto;
+    padding: 3rem 1.5rem;
+    background-color: var(--theme-surface-1);
+    text-align: center;
+  }
+
+  .testimonial-carousel__inner {
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  .testimonial-carousel__slides {
+    position: relative;
+    min-height: 14rem;
+  }
+
+  .testimonial-carousel__slide {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease;
+    pointer-events: none;
+  }
+
+  .testimonial-carousel__slide.is-active {
+    opacity: 1;
+    visibility: visible;
+    position: relative;
+    pointer-events: auto;
+  }
+
+  .testimonial-carousel__quote {
+    padding: 0;
+    margin: 0 0 1.25rem 0;
+    border: none;
+    font-size: var(--font-size-md);
+    font-weight: 400;
+    font-style: italic;
+    line-height: 1.7;
+  }
+
+  .testimonial-carousel__quote::before {
+    content: "„";
+  }
+
+  .testimonial-carousel__quote::after {
+    content: "“";
+  }
+
+  .testimonial-carousel__attribution {
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  .testimonial-carousel__name {
+    font-weight: 600;
+  }
+
+  .testimonial-carousel__role {
+    display: block;
+    margin-top: 0.15rem;
+    margin-left: 1.1rem;
+    font-size: 0.95rem;
+    opacity: 0.75;
+  }
+
+  .testimonial-carousel__dots {
+    display: flex;
+    justify-content: center;
+    gap: 0.6rem;
+    margin-top: 1.75rem;
+  }
+
+  .testimonial-carousel__dot {
+    width: 0.75rem;
+    height: 0.75rem;
+    border-radius: 50%;
+    border: none;
+    padding: 0;
+    background-color: var(--theme-on-surface-2, #888);
+    opacity: 0.35;
+    cursor: pointer;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .testimonial-carousel__dot:hover {
+    opacity: 0.6;
+  }
+
+  .testimonial-carousel__dot.is-active {
+    background-color: var(--theme-primary);
+    opacity: 1;
+    transform: scale(1.15);
+  }
+
+  .testimonial-carousel__dot:focus-visible {
+    outline: 2px solid var(--theme-primary);
+    outline-offset: 3px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .testimonial-carousel__slide {
+      transition: none;
+    }
+    .testimonial-carousel__dot {
+      transition: none;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .testimonial-carousel {
+      padding: 2rem 1rem;
+    }
+    .testimonial-carousel__quote {
+      font-size: 1rem;
+    }
+  }
+</style>
+
+<script>
+  function initTestimonialCarousels() {
+    const carousels = document.querySelectorAll<HTMLElement>('.testimonial-carousel');
+
+    carousels.forEach((carousel) => {
+      // Guard against double-init (e.g., on astro:page-load re-fire).
+      if (carousel.dataset.carouselInitialized === 'true') return;
+      carousel.dataset.carouselInitialized = 'true';
+
+      const slides = Array.from(
+        carousel.querySelectorAll<HTMLElement>('.testimonial-carousel__slide')
+      );
+      const dots = Array.from(
+        carousel.querySelectorAll<HTMLButtonElement>('.testimonial-carousel__dot')
+      );
+      if (slides.length === 0 || dots.length === 0) return;
+
+      const ADVANCE_INTERVAL_MS = 7000;
+      const prefersReducedMotion =
+        typeof window !== 'undefined' &&
+        window.matchMedia &&
+        window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      let currentIndex = 0;
+      let intervalId: number | null = null;
+      let isPaused = false;
+
+      function setActive(index: number) {
+        const normalized = ((index % slides.length) + slides.length) % slides.length;
+        slides.forEach((slide, i) => slide.classList.toggle('is-active', i === normalized));
+        dots.forEach((dot, i) => dot.classList.toggle('is-active', i === normalized));
+        currentIndex = normalized;
+      }
+
+      function advance() {
+        setActive(currentIndex + 1);
+      }
+
+      function startAuto() {
+        if (prefersReducedMotion) return;
+        if (isPaused) return;
+        stopAuto();
+        intervalId = window.setInterval(advance, ADVANCE_INTERVAL_MS);
+      }
+
+      function stopAuto() {
+        if (intervalId !== null) {
+          window.clearInterval(intervalId);
+          intervalId = null;
+        }
+      }
+
+      dots.forEach((dot, i) => {
+        dot.addEventListener('click', () => {
+          setActive(i);
+          // Reset the timer so the user gets a full interval after a manual switch.
+          startAuto();
+        });
+      });
+
+      carousel.addEventListener('mouseenter', () => {
+        isPaused = true;
+        stopAuto();
+      });
+      carousel.addEventListener('mouseleave', () => {
+        isPaused = false;
+        startAuto();
+      });
+      carousel.addEventListener('focusin', () => {
+        isPaused = true;
+        stopAuto();
+      });
+      carousel.addEventListener('focusout', (event) => {
+        // Only resume if focus left the carousel entirely.
+        const next = event.relatedTarget as Node | null;
+        if (next && carousel.contains(next)) return;
+        isPaused = false;
+        startAuto();
+      });
+
+      setActive(0);
+      startAuto();
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initTestimonialCarousels);
+  } else {
+    initTestimonialCarousels();
+  }
+  document.addEventListener('astro:page-load', initTestimonialCarousels);
+</script>
