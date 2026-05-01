@@ -21,7 +21,6 @@ const { testimonials } = Astro.props as Props;
       {testimonials.map((t, i) => (
         <article
           class={`testimonial-carousel__slide${i === 0 ? ' is-active' : ''}`}
-          data-slide-index={i}
         >
           <blockquote class="testimonial-carousel__quote" data-i18n-en={t.quoteEn}>
             {t.quoteDe}
@@ -38,12 +37,11 @@ const { testimonials } = Astro.props as Props;
         </article>
       ))}
     </div>
-    <div class="testimonial-carousel__dots" role="tablist" aria-label="Testimonials">
+    <div class="testimonial-carousel__dots" aria-label="Testimonial navigation">
       {testimonials.map((_, i) => (
         <button
           type="button"
           class={`testimonial-carousel__dot${i === 0 ? ' is-active' : ''}`}
-          data-slide-target={i}
           aria-label={`Show testimonial ${i + 1} of ${testimonials.length}`}
         ></button>
       ))}
