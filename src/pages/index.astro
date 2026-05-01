@@ -4,6 +4,7 @@ import {
 	StickyTextImageSection,
 	CtaCardSection
 } from '@components/odyssey-theme';
+import { Icon } from 'astro-icon/components';
 import Layout from '../layouts/Page.astro';
 import TextAndImageHero from '../components/sections/heros/TextAndImageHero.astro';
 import TestimonialCarousel from '../components/sections/TestimonialCarousel.astro';
@@ -108,6 +109,16 @@ const availabilityDateEN = formatDateEN(availabilityDateStr);
 				<span class="badge badge--primary">Microservices</span>
 				<span class="badge badge--primary">DevOps</span>
 				<span class="badge badge--primary">Claude Code</span>
+				<a
+					href="/niko-boerger-profil.pdf"
+					target="_blank"
+					rel="noopener noreferrer"
+					class="badge profile-download"
+					aria-label="Profil-PDF in neuem Tab öffnen"
+				>
+					<Icon name="mdi:file-download-outline" width="14" height="14" aria-hidden="true" />
+					<span data-i18n-en="Download Profile PDF">Download Profil-PDF</span>
+				</a>
 			</div>
 		</div>
 		<picture slot="image-container">

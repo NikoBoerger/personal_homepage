@@ -49,3 +49,21 @@
   color: var(--theme-on-surface-2, #666);
   font-size: 0.8em;
 }
+.profile-download {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35em;
+  font-size: 0.75em;
+  padding: 0.12em 0.8em;
+  border: 1px solid currentColor;
+  text-decoration: none;
+  color: var(--theme-on-surface-1, #222);
+}
+.profile-download:hover,
+.profile-download:focus-visible {
+  background: var(--theme-surface-2, #e6e6e6);
+  text-decoration: none;
+}
+.profile-download [data-icon] {
+  flex-shrink: 0;
+}
