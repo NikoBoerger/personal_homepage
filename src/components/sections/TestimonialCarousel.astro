@@ -13,6 +13,8 @@ interface Props {
 }
 
 const { testimonials } = Astro.props as Props;
+
+const encodeName = (s: string) => Buffer.from(s, 'utf-8').toString('base64');
 ---
 
 <section class="testimonial-carousel" aria-roledescription="carousel">
@@ -24,7 +26,12 @@ const { testimonials } = Astro.props as Props;
         >
           <blockquote class="testimonial-carousel__quote" data-i18n-en={t.quoteEn}>{t.quoteDe}</blockquote>
           <p class="testimonial-carousel__attribution">
-            <span class="testimonial-carousel__name" data-i18n-en={t.nameEn || t.nameDe}>{t.nameDe}</span>
+            <span
+              class="testimonial-carousel__name"
+              data-nosnippet
+              data-name-de={encodeName(t.nameDe)}
+              data-name-en={encodeName(t.nameEn || t.nameDe)}
+            ></span>
             <span class="testimonial-carousel__role" data-i18n-en={t.roleEn}>{t.roleDe}</span>
           </p>
         </article>
@@ -307,4 +314,52 @@ const { testimonials } = Astro.props as Props;
     initTestimonialCarousels();
   }
   document.addEventListener('astro:page-load', initTestimonialCarousels);
+</script>
+
+<script>
+  // Names are shipped base64-encoded so they don't appear as plaintext in the
+  // server-rendered HTML, keeping them out of search-engine indexes. They are
+  // decoded and inserted into the DOM at runtime, mirroring the email/phone
+  // obfuscation pattern in index.astro.
+  function decodeName(b64: string): string {
+    const binary = atob(b64);
+    const bytes = new Uint8Array(binary.length);
+    for (let i = 0; i < binary.length; i++) {
+      bytes[i] = binary.charCodeAt(i);
+    }
+    return new TextDecoder('utf-8').decode(bytes);
+  }
+
+  function applyTestimonialNames(lang: string) {
+    const attr = lang === 'en' ? 'data-name-en' : 'data-name-de';
+    const spans = document.querySelectorAll<HTMLElement>('.testimonial-carousel__name');
+    spans.forEach((span) => {
+      const encoded = span.getAttribute(attr);
+      if (!encoded) return;
+      try {
+        span.textContent = decodeName(encoded);
+      } catch {
+        // Leave empty on decode failure rather than exposing raw base64.
+      }
+    });
+  }
+
+  function initTestimonialNames() {
+    const lang = localStorage.getItem('preferred-language') || 'de';
+    applyTestimonialNames(lang);
+  }
+
+  document.addEventListener('languagechange', (event) => {
+    const detail = (event as CustomEvent<{ language: string }>).detail;
+    if (detail && detail.language) {
+      applyTestimonialNames(detail.language);
+    }
+  });
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initTestimonialNames);
+  } else {
+    initTestimonialNames();
+  }
+  document.addEventListener('astro:page-load', initTestimonialNames);
 </script>
