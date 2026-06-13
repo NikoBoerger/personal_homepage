@@ -1,0 +1,66 @@
+---
+import AppLayout from '../../../layouts/AppLayout.astro';
+---
+
+<AppLayout
+	app="madhouse"
+	seo={{
+		title: 'Madhouse | Darts Scoring App',
+		description: 'Madhouse is a darts scoring app built by a darts player, for darts players. Beautiful design, powerful features.',
+	}}
+>
+	<section class="intro app-card">
+		<img
+			class="intro__icon"
+			src="/assets/apps/madhouse/app_icon.png"
+			alt="Madhouse"
+			width="120"
+			height="120"
+		/>
+		<h1>Madhouse</h1>
+		<p>
+			Madhouse is a darts scoring app, built <strong>by me, a darts player, for darts players</strong>.
+			Launched in <strong>September 2025</strong>, it combines a <strong>beautiful, intuitive design</strong>
+			with <strong>powerful features</strong>, making it easy to use without sacrificing any functionality.
+			Whether you’re tracking your scores, analyzing your performance, or competing with friends, Madhouse
+			makes scoring darts simple, elegant, and fun.
+		</p>
+	</section>
+
+	<section class="app-card">
+		<h2>Upcoming Features</h2>
+		<ul>
+			<li><strong>Dart Bot</strong>: Play X01 against a bot</li>
+			<li><strong>Improved 2-Player View</strong>: Show two players next to each other, if a two-player match is being played</li>
+			<li><strong>Individual Player Settings</strong>: Set individual keyboard shortcut buttons and other settings for each player</li>
+			<li><strong>Improved Match Summary</strong>: Make it possible to analyze every detail of your match</li>
+			<li><strong>Deletion of Matches</strong>: Delete matches that you don't want to include in the statistics</li>
+			<li><strong>Statistic Filters</strong>: Extensive filtering options to get the most out of your statistics</li>
+			<li><strong>Cricket</strong>: Add Cricket as a second game</li>
+		</ul>
+	</section>
+
+	<section class="app-card">
+		<h2>Contact Support</h2>
+		<p>
+			If you need assistance, please contact me at
+			<span class="app-mail">[Please enable Javascript]</span> in English or German.
+		</p>
+	</section>
+
+	<style>
+		.intro {
+			text-align: center;
+		}
+		.intro__icon {
+			width: 120px;
+			height: 120px;
+			border-radius: 24px;
+			margin: 0 auto 1rem;
+			box-shadow: 0 4px 16px rgba(20, 30, 40, 0.15);
+		}
+		.intro p {
+			text-align: left;
+		}
+	</style>
+</AppLayout>

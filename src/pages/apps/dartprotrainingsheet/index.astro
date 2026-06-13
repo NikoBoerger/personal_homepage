@@ -1,0 +1,82 @@
+---
+import AppLayout from '../../../layouts/AppLayout.astro';
+import { apps } from '../../../config/apps.js';
+
+const meta = apps.dartprotrainingsheet;
+---
+
+<AppLayout
+	app="dartprotrainingsheet"
+	seo={{
+		title: 'Dart Pro Training Sheet',
+		description: 'Improve your skills with this extensive darts training routine. Available on Google Play.',
+	}}
+>
+	<section class="hero app-card">
+		<div class="hero__media">
+			<img
+				src="/assets/apps/dartprotrainingsheet/screenshot.png"
+				alt="Dart Pro Training Sheet app screenshot"
+				width="255"
+				height="510"
+				loading="eager"
+			/>
+		</div>
+		<div class="hero__body">
+			<h1>Dart Pro Training Sheet</h1>
+			<p class="hero__lead">Improve your skills with this extensive darts training routine.</p>
+			<a class="hero__badge" href={meta.playUrl} target="_blank" rel="noopener">
+				<img
+					src="/assets/apps/dartprotrainingsheet/google-play-badge.png"
+					alt="Get it on Google Play"
+					width="255"
+					height="99"
+				/>
+			</a>
+		</div>
+	</section>
+
+	<style>
+		.hero {
+			display: flex;
+			flex-wrap: wrap;
+			align-items: center;
+			gap: 2rem;
+		}
+		.hero__media {
+			flex: 0 0 auto;
+			margin: 0 auto;
+		}
+		.hero__media img {
+			width: 255px;
+			height: auto;
+			border-radius: 16px;
+			box-shadow: 0 6px 22px rgba(20, 30, 40, 0.18);
+		}
+		.hero__body {
+			flex: 1 1 300px;
+			min-width: 260px;
+		}
+		.hero__lead {
+			font-size: 1.15rem;
+			color: var(--app-ink-muted);
+			margin-bottom: 1.5rem;
+		}
+		.hero__badge {
+			display: inline-block;
+			text-decoration: none;
+		}
+		.hero__badge img {
+			width: 220px;
+			height: auto;
+		}
+		@media (max-width: 640px) {
+			.hero {
+				text-align: center;
+			}
+			.hero__body {
+				flex-basis: 100%;
+			}
+		}
+	</style>
+</AppLayout>

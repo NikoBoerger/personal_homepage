@@ -1,0 +1,105 @@
+---
+/*
+ * Standalone layout for the app micro-sites under /apps/<slug>/.
+ *
+ * Deliberately does NOT use Base.astro / Page.astro / BaseHead.astro: those
+ * inject the personal site's Header, Footer, favicon, and brand tokens. App
+ * pages must read as their own site (R2/R3), so this layout renders its own
+ * full <html> document, its own head, and brand-colored header/footer.
+ *
+ * Styling is self-contained via app.css (see that file for why typography.css
+ * and theme.css are intentionally not imported).
+ */
+import '../styles/reset.css';
+import '../styles/app.css';
+import { apps } from '../config/apps.js';
+
+export interface Props {
+	app: keyof typeof apps;
+	seo: { title: string; description?: string };
+}
+
+const { app, seo } = Astro.props as Props;
+const meta = apps[app];
+
+if (!meta) {
+	throw new Error(`AppLayout: unknown app slug "${String(app)}" - add it to src/config/apps.js`);
+}
+
+const year = new Date().getFullYear();
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const ogImage = new URL(meta.ogImagePath, Astro.site);
+const currentPath = Astro.url.pathname.replace(/\/$/, '');
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>{seo.title}</title>
+		{seo.description && <meta name="description" content={seo.description} />}
+		<link rel="icon" type="image/png" href={meta.faviconPath} />
+		<meta name="theme-color" content={meta.brandColor} />
+		<link rel="canonical" href={canonical} />
+		<!-- Open Graph / Twitter: app-scoped; og:image is the app icon, never the personal headshot -->
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content={canonical} />
+		<meta property="og:title" content={seo.title} />
+		{seo.description && <meta property="og:description" content={seo.description} />}
+		<meta property="og:image" content={ogImage} />
+		<meta property="twitter:card" content="summary" />
+		<meta property="twitter:title" content={seo.title} />
+		{seo.description && <meta property="twitter:description" content={seo.description} />}
+		<meta property="twitter:image" content={ogImage} />
+	</head>
+	<body>
+		<div class="app-root" style={`--app-primary: ${meta.brandColor}; --app-primary-dark: ${meta.brandColorDark};`}>
+			<a class="app-skip-link" href="#content">Skip to content</a>
+
+			<header class="app-header">
+				<div class="app-container app-header__inner">
+					<a class="app-header__brand" href={meta.navLinks[0].href}>
+						<img class="app-header__logo" src={meta.logoPath} alt={meta.name} width="40" height="40" />
+						<span class="app-header__title">{meta.name}</span>
+					</a>
+					<nav class="app-nav" aria-label={`${meta.name} navigation`}>
+						{meta.navLinks.map((link) => (
+							<a
+								href={link.href}
+								aria-current={link.href.replace(/\/$/, '') === currentPath ? 'page' : undefined}
+							>
+								{link.title}
+							</a>
+						))}
+					</nav>
+				</div>
+			</header>
+
+			<main id="content" class="app-main">
+				<div class="app-container">
+					<slot />
+				</div>
+			</main>
+
+			<footer class="app-footer">
+				<div class="app-container">
+					&copy; {year} {meta.name} &middot; <span class="app-mail">[Please enable Javascript]</span>
+				</div>
+			</footer>
+		</div>
+
+		<!-- Email obfuscation: assemble the address from parts at runtime so it is
+		     not present as plain text in the served HTML (mirrors impressum.astro). -->
+		<script is:inline>
+			(function () {
+				var user = 'apps.' + 'nikoboerger';
+				var domain = 'gmail' + '.com';
+				var addr = user + '@' + domain;
+				var nodes = document.querySelectorAll('.app-mail');
+				for (var i = 0; i < nodes.length; i++) {
+					nodes[i].innerHTML = '<a href="mailto:' + addr + '">' + addr + '</a>';
+				}
+			})();
+		</script>
+	</body>
+</html>
