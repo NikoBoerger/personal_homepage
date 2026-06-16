@@ -1,0 +1,65 @@
+---
+import AppLayout from '../../../layouts/AppLayout.astro';
+---
+
+<AppLayout
+	app="dartprotrainingsheet"
+	seo={{
+		title: 'Impressum | Dart Pro Training Sheet',
+		description: 'Impressum und rechtliche Angaben für die Dart Pro Training Sheet App.',
+	}}
+>
+	<h1>Impressum</h1>
+
+	<section class="app-card">
+		<p><strong>Angaben gemäß § 5 DDG</strong></p>
+		<p>
+			Niko Börger<br />
+			Gottfried-Keller-Straße 9<br />
+			22848 Norderstedt<br />
+			Deutschland
+		</p>
+	</section>
+
+	<section class="app-card">
+		<p><strong>Kontakt</strong></p>
+		<p>
+			Telefon: <span id="app-impressum-phone">[Please enable Javascript]</span><br />
+			E-Mail: <span class="app-mail">[Please enable Javascript]</span>
+		</p>
+	</section>
+
+	<section class="app-card">
+		<p><strong>Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV</strong></p>
+		<p>
+			Niko Börger<br />
+			Gottfried-Keller-Straße 9<br />
+			22848 Norderstedt
+		</p>
+	</section>
+
+	<section class="app-card">
+		<p><strong>Umsatzsteuer-ID</strong></p>
+		<p>
+			Umsatzsteuer-Identifikationsnummer gemäß § 27 a Umsatzsteuergesetz: DE335605838
+		</p>
+	</section>
+
+	<section class="app-card">
+		<p><strong>Haftungsausschluss</strong></p>
+		<p>
+			Trotz sorgfältiger inhaltlicher Kontrolle übernehme ich keine Haftung für die Inhalte externer Links. Für
+			den Inhalt der verlinkten Seiten sind ausschließlich deren Betreiber verantwortlich.
+		</p>
+	</section>
+
+	<script is:inline>
+		(function () {
+			var phone = '+49 ' + '174 ' + '6098501';
+			var node = document.getElementById('app-impressum-phone');
+			if (node) {
+				node.textContent = phone;
+			}
+		})();
+	</script>
+</AppLayout>

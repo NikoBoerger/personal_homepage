@@ -22,6 +22,7 @@ export const apps = {
 			{ title: 'Home', href: '/apps/dartprotrainingsheet/' },
 			{ title: 'Privacy Policy', href: '/apps/dartprotrainingsheet/privacy/' },
 			{ title: 'Delete Account', href: '/apps/dartprotrainingsheet/delete-account/' },
+			{ title: 'Impressum', href: '/apps/dartprotrainingsheet/impressum/' },
 		],
 	},
 	madhouse: {
