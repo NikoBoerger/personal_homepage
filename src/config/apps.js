@@ -18,6 +18,7 @@ export const apps = {
 		ogImagePath: '/assets/apps/dartprotrainingsheet/app_logo.png',
 		logoPath: '/assets/apps/dartprotrainingsheet/app_logo.png',
 		playUrl: 'https://play.google.com/store/apps/details?id=de.nikoboerger.darttraining',
+		appStoreUrl: 'https://apps.apple.com/app/id6779590469',
 		navLinks: [
 			{ title: 'Home', href: '/apps/dartprotrainingsheet/' },
 			{ title: 'Privacy Policy', href: '/apps/dartprotrainingsheet/privacy/' },

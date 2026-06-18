@@ -9,7 +9,7 @@ const meta = apps.dartprotrainingsheet;
 	app="dartprotrainingsheet"
 	seo={{
 		title: 'Dart Pro Training Sheet',
-		description: 'Improve your skills with this extensive darts training routine. Available on Google Play.',
+		description: 'Improve your skills with this extensive darts training routine. Available on Google Play and the App Store.',
 	}}
 >
 	<section class="hero app-card">
@@ -25,14 +25,24 @@ const meta = apps.dartprotrainingsheet;
 		<div class="hero__body">
 			<h1>Dart Pro Training Sheet</h1>
 			<p class="hero__lead">Improve your skills with this extensive darts training routine.</p>
-			<a class="hero__badge" href={meta.playUrl} target="_blank" rel="noopener">
-				<img
-					src="/assets/apps/dartprotrainingsheet/google-play-badge.png"
-					alt="Get it on Google Play"
-					width="255"
-					height="99"
-				/>
-			</a>
+			<div class="hero__badges">
+				<a class="hero__badge hero__badge--play" href={meta.playUrl} target="_blank" rel="noopener">
+					<img
+						src="/assets/apps/dartprotrainingsheet/google-play-badge.png"
+						alt="Get it on Google Play"
+						width="255"
+						height="99"
+					/>
+				</a>
+				<a class="hero__badge hero__badge--appstore" href={meta.appStoreUrl} target="_blank" rel="noopener">
+					<img
+						src="/assets/apps/dartprotrainingsheet/app-store-badge.svg"
+						alt="Download on the App Store"
+						width="120"
+						height="40"
+					/>
+				</a>
+			</div>
 		</div>
 	</section>
 
@@ -62,12 +72,25 @@ const meta = apps.dartprotrainingsheet;
 			color: var(--app-ink-muted);
 			margin-bottom: 1.5rem;
 		}
+		.hero__badges {
+			display: flex;
+			flex-wrap: wrap;
+			align-items: center;
+			gap: 0.75rem;
+		}
 		.hero__badge {
-			display: inline-block;
+			display: inline-flex;
 			text-decoration: none;
 		}
-		.hero__badge img {
-			width: 220px;
+		/* The Google Play PNG ships with built-in transparent padding, so it is
+		   sized a touch larger than the App Store SVG to make the visible
+		   buttons read at roughly the same height. */
+		.hero__badge--play img {
+			width: 200px;
+			height: auto;
+		}
+		.hero__badge--appstore img {
+			width: 160px;
 			height: auto;
 		}
 		@media (max-width: 640px) {
@@ -76,6 +99,9 @@ const meta = apps.dartprotrainingsheet;
 			}
 			.hero__body {
 				flex-basis: 100%;
+			}
+			.hero__badges {
+				justify-content: center;
 			}
 		}
 	</style>
