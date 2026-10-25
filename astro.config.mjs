@@ -4,7 +4,10 @@ import mdx from "@astrojs/mdx";
 import icon from "astro-icon";
 import lit from "@astrojs/lit";
 
-const noindexPages = ['https://niko-boerger.com/apps/madhouse/impressum/'];
+const noindexPages = [
+  'https://niko-boerger.com/apps/madhouse/impressum/',
+  'https://niko-boerger.com/apps/dartprotrainingsheet/impressum/',
+];
 
 // https://astro.build/config
 export default defineConfig({

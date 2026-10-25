@@ -1,0 +1,190 @@
+---
+import { Image } from 'astro:assets';
+import '../styles/dartpro.css';
+import { dartProTrainingSheet as app } from '../config/dartprotrainingsheet.js';
+import appLogo from '../assets/apps/dartprotrainingsheet/app-logo.png';
+
+export interface Props {
+	variant: 'home' | 'legal';
+	lang?: 'en' | 'de';
+	seo: {
+		title: string;
+		description: string;
+		robots?: string;
+		keywords?: string;
+		ogTitle?: string;
+		ogDescription?: string;
+	};
+	jsonLd?: Record<string, unknown>;
+}
+
+const { variant, lang = 'en', seo, jsonLd } = Astro.props as Props;
+
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+const ogImage = new URL(app.ogImagePath, Astro.site).href;
+const currentPath = Astro.url.pathname;
+const year = new Date().getFullYear();
+const isHome = variant === 'home';
+const ogTitle = seo.ogTitle ?? seo.title;
+const ogDescription = seo.ogDescription ?? seo.description;
+const homeLink = isHome ? '#top' : app.paths.home;
+const ariaCurrent = (path: string) => (path === currentPath ? 'page' : undefined);
+const backLabel = lang === 'de' ? '← Zurück zur App' : '← Back to app';
+---
+
+<html lang={lang}>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>{seo.title}</title>
+		<meta name="description" content={seo.description} />
+		{seo.keywords && <meta name="keywords" content={seo.keywords} />}
+		<meta name="robots" content={seo.robots ?? 'index, follow, max-image-preview:large'} />
+		<meta name="theme-color" content={app.themeColor} />
+		<link rel="canonical" href={canonical} />
+		<meta name="author" content="Niko Börger" />
+
+		<meta property="og:type" content="website" />
+		<meta property="og:site_name" content={app.name} />
+		<meta property="og:locale" content={lang === 'de' ? 'de_DE' : 'en_US'} />
+		<meta property="og:url" content={canonical} />
+		<meta property="og:title" content={ogTitle} />
+		<meta property="og:description" content={ogDescription} />
+		<meta property="og:image" content={ogImage} />
+		<meta property="og:image:width" content="1200" />
+		<meta property="og:image:height" content="630" />
+		<meta property="og:image:alt" content="Dart Pro Training Sheet darts practice app on a phone" />
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content={ogTitle} />
+		<meta name="twitter:description" content={ogDescription} />
+		<meta name="twitter:image" content={ogImage} />
+		{isHome && <meta name="apple-itunes-app" content={`app-id=${app.appStoreId}`} />}
+
+		<link rel="icon" type="image/png" sizes="48x48" href="/assets/apps/dartprotrainingsheet/favicon-48.png" />
+		<link rel="icon" type="image/png" sizes="192x192" href="/assets/apps/dartprotrainingsheet/favicon-192.png" />
+		<link rel="apple-touch-icon" href="/assets/apps/dartprotrainingsheet/apple-touch-icon.png" />
+		<link rel="preload" href="/assets/apps/dartprotrainingsheet/fonts/manrope-latin-wght.woff2" as="font" type="font/woff2" crossorigin />
+		<script is:inline>document.documentElement.classList.add('dp-js');</script>
+		{jsonLd && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
+		<slot name="head" />
+	</head>
+	<body>
+		<div id="top" class:list={['dp-root', isHome ? 'dp-root--home' : 'dp-root--legal']}>
+			<a class="dp-skip" href="#content">{lang === 'de' ? 'Zum Inhalt springen' : 'Skip to content'}</a>
+
+			<header class="dp-header">
+				<nav aria-label="Main" class="dp-nav">
+					<a href={homeLink} aria-label={`${app.name} home`} class="dp-brand">
+						<span class="dp-brand__icon">
+							<Image src={appLogo} alt="" width={26} height={26} densities={[1, 2, 3]} loading="eager" />
+						</span>
+						<span class="dp-brand__name">{app.name}</span>
+					</a>
+					{
+						isHome ? (
+							<div class="dp-nav__links">
+								<a href="#download" class="dp-pill">Download</a>
+								<a href="#screenshots" class="dp-nav__link">Screenshots</a>
+								<a href="#features" class="dp-nav__link">Features</a>
+							</div>
+						) : (
+							<a href={app.paths.home} class="dp-back">{backLabel}</a>
+						)
+					}
+				</nav>
+			</header>
+
+			<slot />
+
+			<footer class="dp-footer">
+				<div class="dp-footer__inner">
+					<div class="dp-footer__brand">
+						<span class="dp-footer__name">{app.name}</span>
+						<span class="dp-footer__copy">© {year} Niko Börger</span>
+					</div>
+					<nav aria-label="Legal" class="dp-footer__links">
+						<a href={app.paths.privacy} aria-current={ariaCurrent(app.paths.privacy)}>Privacy Policy</a>
+						<a href={app.paths.deleteAccount} aria-current={ariaCurrent(app.paths.deleteAccount)}>Delete Account</a>
+						<a href={app.paths.impressum} aria-current={ariaCurrent(app.paths.impressum)}>Impressum</a>
+						<a href={app.paths.impressum} data-mail-link>Support</a>
+					</nav>
+				</div>
+			</footer>
+		</div>
+
+		<script is:inline>
+			(function () {
+				var address = 'apps.' + 'nikoboerger' + '@' + 'gmail' + '.com';
+				document.querySelectorAll('[data-mail-link]').forEach(function (link) {
+					link.href = 'mailto:' + address + (link.getAttribute('data-mail-subject') || '');
+					if (link.hasAttribute('data-mail-text')) {
+						link.querySelector('[data-mail-text-target]').textContent = address;
+					}
+				});
+				document.querySelectorAll('[data-mail]').forEach(function (node) {
+					var link = document.createElement('a');
+					link.href = 'mailto:' + address;
+					link.textContent = address;
+					if (node.className) link.className = node.className;
+					node.replaceWith(link);
+				});
+
+				var header = document.querySelector('.dp-header');
+				var updateHeader = function () {
+					header.classList.toggle('is-scrolled', window.scrollY > 8);
+				};
+				updateHeader();
+				window.addEventListener('scroll', updateHeader, { passive: true });
+
+				if (!('IntersectionObserver' in window)) {
+					document.querySelectorAll('[data-reveal]').forEach(function (node) {
+						node.classList.add('is-visible');
+					});
+					return;
+				}
+
+				var revealObserver = new IntersectionObserver(
+					function (entries) {
+						entries.forEach(function (entry) {
+							if (!entry.isIntersecting) return;
+							entry.target.classList.add('is-visible');
+							revealObserver.unobserve(entry.target);
+						});
+					},
+					{ rootMargin: '0px 0px -8% 0px', threshold: 0.12 }
+				);
+				document.querySelectorAll('[data-reveal]').forEach(function (node) {
+					revealObserver.observe(node);
+				});
+
+				var tocLinks = Array.prototype.slice.call(document.querySelectorAll('[data-toc] a'));
+				if (!tocLinks.length) return;
+				var tocSections = tocLinks.map(function (link) {
+					return document.getElementById(link.getAttribute('href').slice(1));
+				});
+				var spyQueued = false;
+				var highlightCurrentSection = function () {
+					spyQueued = false;
+					var readingLine = window.innerHeight * 0.3;
+					var current = -1;
+					tocSections.forEach(function (section, index) {
+						if (section && section.getBoundingClientRect().top <= readingLine) current = index;
+					});
+					tocLinks.forEach(function (link, index) {
+						link.classList.toggle('is-active', index === current);
+					});
+				};
+				highlightCurrentSection();
+				window.addEventListener(
+					'scroll',
+					function () {
+						if (spyQueued) return;
+						spyQueued = true;
+						requestAnimationFrame(highlightCurrentSection);
+					},
+					{ passive: true }
+				);
+			})();
+		</script>
+	</body>
+</html>

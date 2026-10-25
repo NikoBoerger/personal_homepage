@@ -1,65 +1,88 @@
 ---
-import AppLayout from '../../../layouts/AppLayout.astro';
+import DartProLayout from '../../../layouts/DartProLayout.astro';
+import LegalHero from '../../../components/dartpro/LegalHero.astro';
+import { dartProTrainingSheet as app } from '../../../config/dartprotrainingsheet.js';
 ---
 
-<AppLayout
-	app="dartprotrainingsheet"
+<DartProLayout
+	variant="legal"
+	lang="de"
 	seo={{
 		title: 'Impressum | Dart Pro Training Sheet',
-		description: 'Impressum und rechtliche Angaben für die Dart Pro Training Sheet App.',
+		description: 'Impressum und Anbieterkennzeichnung der Dart Pro Training Sheet App.',
+		robots: 'noindex, follow',
 	}}
 >
-	<h1>Impressum</h1>
+	<main id="content" class="dp-legal-page">
+		<LegalHero eyebrow="Rechtliches" title="Impressum" meta="Angaben gemäß § 5 DDG" />
 
-	<section class="app-card">
-		<p><strong>Angaben gemäß § 5 DDG</strong></p>
-		<p>
-			Niko Börger<br />
-			Gottfried-Keller-Straße 9<br />
-			22848 Norderstedt<br />
-			Deutschland
-		</p>
-	</section>
+		<div class="dp-legal">
+			<div class="dp-legal__inner">
+				<article class="dp-legal__article dp-legal__article--wide">
+					<div class="dp-impressum__cards">
+						<section class="dp-impressum__card" data-reveal>
+							<h2>Anbieter</h2>
+							<p>Niko Börger<br />Gottfried-Keller-Straße 9<br />22848 Norderstedt<br />Deutschland</p>
+						</section>
+						<section class="dp-impressum__card" data-reveal style="--dp-delay: 100ms">
+							<h2>Kontakt</h2>
+							<p>
+								E-Mail: <span data-mail>[Please enable Javascript]</span><br />
+								Telefon: <span data-phone>[Please enable Javascript]</span>
+							</p>
+						</section>
+						<section class="dp-impressum__card" data-reveal style="--dp-delay: 200ms">
+							<h2>Umsatzsteuer-ID</h2>
+							<p>Umsatzsteuer-Identifikationsnummer gemäß § 27 a Umsatzsteuergesetz: <strong>DE335605838</strong></p>
+						</section>
+					</div>
 
-	<section class="app-card">
-		<p><strong>Kontakt</strong></p>
-		<p>
-			Telefon: <span id="app-impressum-phone">[Please enable Javascript]</span><br />
-			E-Mail: <span class="app-mail">[Please enable Javascript]</span>
-		</p>
-	</section>
+					<section class="dp-legal__section" data-reveal>
+						<h2>Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV</h2>
+						<p>Niko Börger, Anschrift wie oben</p>
+					</section>
 
-	<section class="app-card">
-		<p><strong>Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV</strong></p>
-		<p>
-			Niko Börger<br />
-			Gottfried-Keller-Straße 9<br />
-			22848 Norderstedt
-		</p>
-	</section>
+					<section class="dp-legal__section" data-reveal>
+						<h2>Verbraucherstreitbeilegung</h2>
+						<p>
+							Ich bin nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle
+							teilzunehmen.
+						</p>
+					</section>
 
-	<section class="app-card">
-		<p><strong>Umsatzsteuer-ID</strong></p>
-		<p>
-			Umsatzsteuer-Identifikationsnummer gemäß § 27 a Umsatzsteuergesetz: DE335605838
-		</p>
-	</section>
+					<section class="dp-legal__section" data-reveal>
+						<h2>Haftung für Inhalte</h2>
+						<p>
+							Die Inhalte dieser Seite wurden mit größter Sorgfalt erstellt. Für die Richtigkeit, Vollständigkeit und
+							Aktualität der Inhalte kann ich jedoch keine Gewähr übernehmen.
+						</p>
+					</section>
 
-	<section class="app-card">
-		<p><strong>Haftungsausschluss</strong></p>
-		<p>
-			Trotz sorgfältiger inhaltlicher Kontrolle übernehme ich keine Haftung für die Inhalte externer Links. Für
-			den Inhalt der verlinkten Seiten sind ausschließlich deren Betreiber verantwortlich.
-		</p>
-	</section>
+					<section class="dp-legal__section" data-reveal>
+						<h2>Haftung für Links</h2>
+						<p>
+							Diese Seite enthält Links zu externen Websites Dritter, auf deren Inhalte ich keinen Einfluss habe. Für die
+							Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter oder Betreiber verantwortlich.
+						</p>
+					</section>
+
+					<section class="dp-contact" data-reveal>
+						<h2>Datenschutz</h2>
+						<p>Welche Daten die App verarbeitet und welche Rechte Sie haben, steht in der Datenschutzerklärung.</p>
+						<a href={app.paths.privacy} class="dp-contact__button" lang="en">Privacy Policy</a>
+					</section>
+				</article>
+			</div>
+		</div>
+	</main>
 
 	<script is:inline>
-		(function () {
-			var phone = '+49 ' + '174 ' + '6098501';
-			var node = document.getElementById('app-impressum-phone');
-			if (node) {
-				node.textContent = phone;
-			}
-		})();
+		document.querySelectorAll('[data-phone]').forEach(function (node) {
+			var number = '+49 ' + '174 ' + '6098501';
+			var link = document.createElement('a');
+			link.href = 'tel:' + number.replace(/\s/g, '');
+			link.textContent = number;
+			node.replaceWith(link);
+		});
 	</script>
-</AppLayout>
+</DartProLayout>

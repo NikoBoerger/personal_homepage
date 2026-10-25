@@ -1,108 +1,331 @@
 ---
-import AppLayout from '../../../layouts/AppLayout.astro';
-import { apps } from '../../../config/apps.js';
+import { Image, getImage } from 'astro:assets';
+import DartProLayout from '../../../layouts/DartProLayout.astro';
+import { dartProTrainingSheet as app } from '../../../config/dartprotrainingsheet.js';
+import appLogo from '../../../assets/apps/dartprotrainingsheet/app-logo.png';
+import homeEmptyShot from '../../../assets/apps/dartprotrainingsheet/home-empty.png';
+import homeShot from '../../../assets/apps/dartprotrainingsheet/home.png';
+import scoringShot from '../../../assets/apps/dartprotrainingsheet/game-scoring.png';
+import finishingShot from '../../../assets/apps/dartprotrainingsheet/game-finishing.png';
+import statsShot from '../../../assets/apps/dartprotrainingsheet/stats.png';
+import statsDetailShot from '../../../assets/apps/dartprotrainingsheet/stats-detail.png';
+import leaderboardShot from '../../../assets/apps/dartprotrainingsheet/leaderboard.png';
 
-const meta = apps.dartprotrainingsheet;
+const title = '45–60 Minute Darts Practice Routine | Dart Pro Training Sheet';
+const description =
+	'A 45–60 minute darts practice routine: eight training games, one final score, hit maps, stats and a leaderboard. Free darts training app for iPhone and Android.';
+
+const fanWidths = [240, 420, 620];
+const fanSizes = '(min-width: 1200px) 204px, 30vw';
+const cardWidths = [250, 500, 750];
+const shotWidths = [290, 580, 870];
+
+const steps = [
+	{ number: '01', title: 'Follow the sheet', body: 'Play eight games in order. Finishing one unlocks the next one down the sheet.' },
+	{ number: '02', title: 'Receive your final score', body: 'Every game rolls into a single total score.' },
+	{ number: '03', title: 'See your improvements', body: 'Track progress over time and compare with friends.' },
+];
+
+const featureCards = [
+	{
+		tone: 'bright',
+		title: 'One sheet, played in order',
+		body: 'Eight training games follow one after another. Finish one and the next opens up, while every result adds to your total.',
+		image: homeShot,
+		alt: 'Darts training sheet with the practice games still to play',
+		delay: 0,
+	},
+	{
+		tone: 'deep',
+		title: 'Tap in your hits',
+		body: 'Throw your visit, then enter the hits with one tap. Big targets and big buttons you can use straight from the oche.',
+		image: scoringShot,
+		alt: 'Scoring 18 darts practice game with the hit keypad',
+		delay: 120,
+	},
+	{
+		tone: 'deep',
+		title: 'See where your darts land',
+		body: 'A hit map on the board, your accuracy for every target and your best visit, so you know which numbers need work.',
+		image: statsDetailShot,
+		alt: 'Hit map on the dartboard and accuracy for every target',
+		delay: 0,
+	},
+	{
+		tone: 'bright',
+		title: 'One final score',
+		body: 'Every game adds its points to the sheet. Finish all eight and you get one final score that shows how you threw today, compared with your usual level and with everyone else on the leaderboard.',
+		image: statsShot,
+		alt: 'Darts statistics with the final score chart over time',
+		delay: 120,
+	},
+];
+
+const infoCards = [
+	{
+		eyebrow: 'Share',
+		title: 'Send the whole sheet as one image',
+		body: 'After a session, share a clean result card with your final score, duration and every game, instead of several screenshots.',
+		chips: ['Final score', 'Every visit', 'Trend'],
+		delay: 0,
+	},
+	{
+		eyebrow: 'Transfer & Backup',
+		title: 'Your sheets, on every device',
+		body: 'Move finished sheets between phones with a file or a QR code, back them up to Google Drive, or turn on auto-sync and forget about it.',
+		chips: ['File export', 'QR code', 'Google Drive', 'Auto-sync'],
+		delay: 120,
+	},
+];
+
+const shots = [
+	{ src: homeEmptyShot, alt: 'Start screen of the darts practice routine with a new training sheet' },
+	{ src: homeShot, alt: 'Training sheet with finished and upcoming darts games' },
+	{ src: scoringShot, alt: 'Scoring 18 darts training game with hit keypad' },
+	{ src: finishingShot, alt: 'Finishing darts game: check out 50 with a double' },
+	{ src: statsShot, alt: 'Darts statistics with score chart over time' },
+	{ src: statsDetailShot, alt: 'Dartboard hit map and accuracy by target' },
+	{ src: leaderboardShot, alt: 'Darts leaderboard ranked by final score' },
+];
+
+const games = [
+	'Single: three darts at every single field on the board',
+	'Scoring 18: 14 visits at the 18',
+	'Scoring 19: 14 visits at the 19',
+	'Scoring 20: 14 visits at the 20',
+	'20, 19, 18: first dart at 20, second at 19, third at 18',
+	'Triple: one visit for each triple from T20 down to T7',
+	'Double: one visit for every double field on the board',
+	'Finishing: 21 given finishes, double out in three darts or fewer',
+];
+
+const absolute = (path: string) => new URL(path, Astro.site).href;
+const screenshotUrls = await Promise.all(
+	shots.map(async ({ src }) => absolute((await getImage({ src, width: 580, format: 'webp' })).src))
+);
+
+const jsonLd = {
+	'@context': 'https://schema.org',
+	'@type': 'MobileApplication',
+	name: app.name,
+	alternateName: ['Dart Pro Training', 'Darts Practice Routine App'],
+	url: absolute(app.paths.home),
+	applicationCategory: 'SportsApplication',
+	applicationSubCategory: 'Darts training',
+	operatingSystem: 'iOS, Android',
+	inLanguage: 'en',
+	description:
+		'A 45–60 minute darts practice routine: eight training games played in order, from singles to finishing, that add up to one final score you can track and compare.',
+	featureList: [
+		...games,
+		'One final score for the whole practice session',
+		'Hit map and accuracy for every target',
+		'Statistics and score trend over time',
+		'Leaderboard',
+		'Shareable result image',
+		'Transfer by file or QR code, Google Drive backup and auto-sync',
+	],
+	timeRequired: 'PT45M',
+	image: absolute(app.iconPath),
+	screenshot: screenshotUrls,
+	author: { '@type': 'Person', name: 'Niko Börger', url: absolute('/') },
+	offers: { '@type': 'Offer', price: '0', priceCurrency: 'EUR' },
+	installUrl: [app.appStoreUrl, app.playUrl],
+	sameAs: [app.appStoreUrl, app.playUrl],
+};
 ---
 
-<AppLayout
-	app="dartprotrainingsheet"
+<DartProLayout
+	variant="home"
 	seo={{
-		title: 'Dart Pro Training Sheet',
-		description: 'Improve your skills with this extensive darts training routine. Available on Google Play and the App Store.',
+		title,
+		description,
+		keywords:
+			'darts practice routine, darts training routine, darts practice app, darts training app, dart practice games, darts training sheet, darts scoring practice, darts finishing practice',
+		ogTitle: 'Dart Pro Training Sheet: a 45–60 minute darts practice routine',
+		ogDescription: 'Eight darts training games. One score. Real progress. Free on iPhone and Android.',
 	}}
+	jsonLd={jsonLd}
 >
-	<section class="hero app-card">
-		<div class="hero__media">
-			<img
-				src="/assets/apps/dartprotrainingsheet/screenshot.png"
-				alt="Dart Pro Training Sheet app screenshot"
-				width="255"
-				height="510"
-				loading="eager"
-			/>
-		</div>
-		<div class="hero__body">
-			<h1>Dart Pro Training Sheet</h1>
-			<p class="hero__lead">Improve your skills with this extensive darts training routine.</p>
-			<div class="hero__badges">
-				<a class="hero__badge hero__badge--play" href={meta.playUrl} target="_blank" rel="noopener">
-					<img
-						src="/assets/apps/dartprotrainingsheet/google-play-badge.png"
-						alt="Get it on Google Play"
-						width="255"
-						height="99"
-					/>
-				</a>
-				<a class="hero__badge hero__badge--appstore" href={meta.appStoreUrl} target="_blank" rel="noopener">
-					<img
-						src="/assets/apps/dartprotrainingsheet/app-store-badge.svg"
-						alt="Download on the App Store"
-						width="120"
-						height="40"
-					/>
-				</a>
-			</div>
-		</div>
-	</section>
+	<main id="content">
+		<section aria-labelledby="hero-title" class="dp-hero">
+			<div class="dp-hero__inner">
+				<div class="dp-hero__copy">
+					<h1 id="hero-title" class="dp-hero__title" data-intro>
+						<span class="dp-eyebrow">45–60 Minute Darts Practice Routine</span>
+						<span class="dp-hero__headline">Eight games. One score. Real progress.</span>
+					</h1>
+					<p class="dp-hero__lead" data-intro style="--dp-delay: 140ms">
+						Eight dart games, one at a time, from singles to finishing. Every hit feeds a single score you can beat next
+						time.
+					</p>
+					<div class="dp-badges" data-intro style="--dp-delay: 240ms">
+						<a href={app.appStoreUrl} aria-label="Download Dart Pro Training Sheet on the App Store" class="dp-badge">
+							<img src="/assets/apps/dartprotrainingsheet/badge-app-store.svg" alt="Download on the App Store" width="189" height="56" />
+						</a>
+						<a href={app.playUrl} aria-label="Get Dart Pro Training Sheet on Google Play" class="dp-badge">
+							<img src="/assets/apps/dartprotrainingsheet/badge-google-play.svg" alt="Get it on Google Play" width="189" height="56" />
+						</a>
+					</div>
+					<p class="dp-hero__platforms" data-intro style="--dp-delay: 320ms">Free on iPhone and Android</p>
+				</div>
 
-	<style>
-		.hero {
-			display: flex;
-			flex-wrap: wrap;
-			align-items: center;
-			gap: 2rem;
-		}
-		.hero__media {
-			flex: 0 0 auto;
-			margin: 0 auto;
-		}
-		.hero__media img {
-			width: 255px;
-			height: auto;
-			border-radius: 16px;
-			box-shadow: 0 6px 22px rgba(20, 30, 40, 0.18);
-		}
-		.hero__body {
-			flex: 1 1 300px;
-			min-width: 260px;
-		}
-		.hero__lead {
-			font-size: 1.15rem;
-			color: var(--app-ink-muted);
-			margin-bottom: 1.5rem;
-		}
-		.hero__badges {
-			display: flex;
-			flex-wrap: wrap;
-			align-items: center;
-			gap: 0.75rem;
-		}
-		.hero__badge {
-			display: inline-flex;
-			text-decoration: none;
-		}
-		/* The Google Play PNG ships with built-in transparent padding, so it is
-		   sized a touch larger than the App Store SVG to make the visible
-		   buttons read at roughly the same height. */
-		.hero__badge--play img {
-			width: 200px;
-			height: auto;
-		}
-		.hero__badge--appstore img {
-			width: 160px;
-			height: auto;
-		}
-		@media (max-width: 640px) {
-			.hero {
-				text-align: center;
-			}
-			.hero__body {
-				flex-basis: 100%;
-			}
-			.hero__badges {
-				justify-content: center;
-			}
-		}
-	</style>
-</AppLayout>
+				<div class="dp-hero__visual">
+					<div class="dp-fan" role="img" aria-label="Dart Pro Training Sheet app screenshots">
+						<Image src={statsShot} alt="" widths={fanWidths} sizes={fanSizes} loading="eager" class="dp-fan__shot dp-fan__shot--outer-left" data-intro="fan" style="--dp-delay: 420ms" />
+						<Image src={scoringShot} alt="" widths={fanWidths} sizes={fanSizes} loading="eager" class="dp-fan__shot dp-fan__shot--inner-left" data-intro="fan" style="--dp-delay: 300ms" />
+						<Image src={statsDetailShot} alt="" widths={fanWidths} sizes={fanSizes} loading="eager" class="dp-fan__shot dp-fan__shot--outer-right" data-intro="fan" style="--dp-delay: 420ms" />
+						<Image src={finishingShot} alt="" widths={fanWidths} sizes={fanSizes} loading="eager" class="dp-fan__shot dp-fan__shot--inner-right" data-intro="fan" style="--dp-delay: 300ms" />
+						<Image
+							src={homeEmptyShot}
+							alt="Dart Pro Training Sheet start screen"
+							widths={fanWidths}
+							sizes={fanSizes}
+							loading="eager"
+							fetchpriority="high"
+							class="dp-fan__shot dp-fan__shot--center"
+							data-intro="fan"
+							style="--dp-delay: 120ms; --dp-from-x: 0"
+						/>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section id="how" aria-labelledby="how-title" class="dp-steps">
+			<h2 id="how-title" class="dp-sr-only">How the darts practice routine works</h2>
+			<ol class="dp-steps__list">
+				{
+					steps.map((step, index) => (
+						<li class="dp-step" data-reveal style={`--dp-delay: ${index * 100}ms`}>
+							<span class="dp-step__number" aria-hidden="true">{step.number}</span>
+							<h3 class="dp-step__title">{step.title}</h3>
+							<p class="dp-step__body">{step.body}</p>
+						</li>
+					))
+				}
+			</ol>
+		</section>
+
+		<section id="features" aria-labelledby="features-title" class="dp-features">
+			<div class="dp-features__inner">
+				<div class="dp-section-head" data-reveal>
+					<p class="dp-eyebrow">Features</p>
+					<h2 id="features-title" class="dp-section-title">Train with a plan. See what it does for your game.</h2>
+				</div>
+
+				<div class="dp-cards">
+					{
+						featureCards.map((card) => (
+							<article class:list={['dp-card', `dp-card--${card.tone}`]} data-reveal style={`--dp-delay: ${card.delay}ms`}>
+								<div class="dp-card__text">
+									<h3 class="dp-card__title">{card.title}</h3>
+									<p class="dp-card__body">{card.body}</p>
+								</div>
+								<div class="dp-card__media">
+									<Image src={card.image} alt={card.alt} widths={cardWidths} sizes="250px" />
+								</div>
+							</article>
+						))
+					}
+				</div>
+
+				<article class="dp-leaderboard" data-reveal>
+					<div class="dp-leaderboard__text">
+						<p class="dp-eyebrow">Leaderboard</p>
+						<h3 class="dp-leaderboard__title">Put your score next to everyone else's.</h3>
+						<p class="dp-leaderboard__body">
+							Finished sheets go straight to the public leaderboard. Check your rank for all time or a single period.
+						</p>
+					</div>
+					<div class="dp-leaderboard__visual" data-reveal="right" style="--dp-delay: 200ms">
+						<div class="dp-phone">
+							<Image src={leaderboardShot} alt="Darts leaderboard ranked by final score" widths={[300, 600, 900]} sizes="300px" />
+						</div>
+					</div>
+				</article>
+
+				<div class="dp-cards">
+					{
+						infoCards.map((card) => (
+							<article class="dp-info" data-reveal style={`--dp-delay: ${card.delay}ms`}>
+								<p class="dp-eyebrow">{card.eyebrow}</p>
+								<h3 class="dp-info__title">{card.title}</h3>
+								<p class="dp-info__body">{card.body}</p>
+								<ul class="dp-chips">
+									{card.chips.map((chip) => (
+										<li>{chip}</li>
+									))}
+								</ul>
+							</article>
+						))
+					}
+				</div>
+			</div>
+		</section>
+
+		<section id="story" aria-label="Why the app exists" class="dp-quote">
+			<figure class="dp-quote__figure" data-reveal>
+				<span class="dp-quote__mark" aria-hidden="true">“</span>
+				<blockquote class="dp-quote__text">
+					<p>
+						I was tired of five-minute training games that never added up to anything. So I built a sheet that guides you
+						through eight games to one final score. After all that time at the board you don't want to mess it up, and that
+						pressure is the point. The routine never changes, so every result is comparable, with your own and with
+						everyone else's.
+					</p>
+				</blockquote>
+				<figcaption class="dp-quote__byline">
+					<span class="dp-quote__avatar">
+						<Image src={appLogo} alt="" width={30} height={30} densities={[1, 2, 3]} />
+					</span>
+					<span class="dp-quote__who">
+						<span class="dp-quote__name">Niko Börger</span>
+						<span class="dp-quote__role">Developer of Dart Pro Training Sheet</span>
+					</span>
+				</figcaption>
+			</figure>
+		</section>
+
+		<section id="screenshots" aria-labelledby="shots-title" class="dp-shots">
+			<div class="dp-shots__head" data-reveal>
+				<div class="dp-section-head">
+					<p class="dp-eyebrow">Screenshots</p>
+					<h2 id="shots-title" class="dp-section-title">Take a look inside.</h2>
+				</div>
+				<p class="dp-shots__hint" aria-hidden="true">Scroll sideways <span class="dp-shots__arrow">→</span></p>
+			</div>
+			<div class="dp-shots__track" tabindex="0" role="region" aria-label="App screenshots, scroll sideways">
+				{
+					shots.map((shot, index) => (
+						<figure class="dp-shot" data-reveal="right" style={`--dp-delay: ${index * 90}ms`}>
+							<Image src={shot.src} alt={shot.alt} widths={shotWidths} sizes="(min-width: 1210px) 290px, max(230px, 24vw)" />
+						</figure>
+					))
+				}
+			</div>
+		</section>
+
+		<section id="download" aria-labelledby="download-title" class="dp-download">
+			<div class="dp-download__inner">
+				<div data-reveal="pop">
+					<div class="dp-download__icon">
+						<Image src={appLogo} alt="Dart Pro Training Sheet app icon" width={76} height={76} densities={[1, 2, 3]} />
+					</div>
+				</div>
+				<h2 id="download-title" class="dp-download__title" data-reveal style="--dp-delay: 100ms">Your next sheet is waiting.</h2>
+				<p class="dp-download__body" data-reveal style="--dp-delay: 180ms">
+					Download Dart Pro Training Sheet and make your next practice session count.
+				</p>
+				<div class="dp-badges dp-badges--center" data-reveal style="--dp-delay: 260ms">
+					<a href={app.appStoreUrl} aria-label="Download Dart Pro Training Sheet on the App Store" class="dp-badge">
+						<img src="/assets/apps/dartprotrainingsheet/badge-app-store.svg" alt="Download on the App Store" width="189" height="56" loading="lazy" />
+					</a>
+					<a href={app.playUrl} aria-label="Get Dart Pro Training Sheet on Google Play" class="dp-badge">
+						<img src="/assets/apps/dartprotrainingsheet/badge-google-play.svg" alt="Get it on Google Play" width="189" height="56" loading="lazy" />
+					</a>
+				</div>
+			</div>
+		</section>
+	</main>
+</DartProLayout>

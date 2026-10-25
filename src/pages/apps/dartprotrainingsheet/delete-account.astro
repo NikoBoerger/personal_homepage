@@ -1,28 +1,63 @@
 ---
-import AppLayout from '../../../layouts/AppLayout.astro';
+import DartProLayout from '../../../layouts/DartProLayout.astro';
+import { dartProTrainingSheet as app } from '../../../config/dartprotrainingsheet.js';
+
+const deletionSubject = '?subject=Dart%20Pro%20Training%20Sheet%3A%20Delete%20account';
 ---
 
-<AppLayout
-	app="dartprotrainingsheet"
+<DartProLayout
+	variant="legal"
 	seo={{
 		title: 'Delete Account | Dart Pro Training Sheet',
-		description: 'How to request deletion of your account and data for the Dart Pro Training Sheet app.',
+		description:
+			'How to request deletion of your Dart Pro Training Sheet sign-in data, and how to delete your Google Drive backups, leaderboard scores and training data yourself.',
 	}}
 >
-	<h1>Request Data Deletion</h1>
+	<main id="content" class="dp-delete">
+		<div class="dp-delete__inner">
+			<p class="dp-eyebrow" data-intro>Delete Account</p>
+			<h1 class="dp-delete__title" data-intro style="--dp-delay: 80ms">Request Data Deletion</h1>
+			<p class="dp-delete__lead" data-intro style="--dp-delay: 160ms">
+				To completely remove the Google account you signed in with from this app, and with it all data I hold about it,
+				just write an email to:
+			</p>
 
-	<section class="app-card">
-		<p>
-			If you signed in with your Google account (Android), you can request deletion of the login information
-			associated with your account. Just write an email to <span class="app-mail">[Please enable Javascript]</span>,
-			naming the Google email address you used to sign in, and I will delete the login records I hold for you
-			(these are recorded in the app's analytics).
-		</p>
-		<p>
-			Your training data backup is stored in your own Google Drive, not on my servers. You can delete it yourself
-			at any time by removing the app's backup data in your Google Drive, or by revoking the app's access to your
-			Google account in your Google Account settings. Training data on your device is removed when you delete it
-			in the app or uninstall the app.
-		</p>
-	</section>
-</AppLayout>
+			<a href={app.paths.impressum} class="dp-delete__mail" data-mail-link data-mail-text data-mail-subject={deletionSubject} data-intro="pop" style="--dp-delay: 240ms">
+				<span class="dp-delete__at" aria-hidden="true">@</span>
+				<span data-mail-text-target>[Please enable Javascript]</span>
+			</a>
+
+			<div class="dp-notes">
+				<div class="dp-note" data-reveal style="--dp-delay: 320ms">
+					<span class="dp-note__icon" aria-hidden="true">i</span>
+					<div class="dp-note__body">
+						<p>
+							Please name the Google email address you used to sign in, so I can identify the account and delete it. I
+							delete your sign-in record within 30 days and confirm it by email.
+						</p>
+					</div>
+				</div>
+				<div class="dp-note" data-reveal style="--dp-delay: 400ms">
+					<span class="dp-note__icon" aria-hidden="true">i</span>
+					<div class="dp-note__body">
+						<p>
+							<strong>Data you can delete yourself.</strong> Your training sheets are stored on your device: delete them in
+							the app or uninstall it. On Android, backups are stored in your own Google Drive, in the folder “Dart Pro
+							Training Sheet (Backups)”: delete them there and revoke the app’s access in your Google account settings.
+							Leaderboard scores belong to your Google Play Games profile and are deleted together with your Play Games data.
+						</p>
+					</div>
+				</div>
+				<div class="dp-note" data-reveal style="--dp-delay: 480ms">
+					<span class="dp-note__icon" aria-hidden="true">i</span>
+					<div class="dp-note__body">
+						<p>
+							The iOS version has no sign-in, so there is no account to delete. All its data is stored on your device.
+							Details are in the <a href={app.paths.privacy}>Privacy Policy</a>.
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</main>
+</DartProLayout>

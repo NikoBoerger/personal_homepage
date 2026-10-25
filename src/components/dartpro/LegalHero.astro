@@ -1,0 +1,31 @@
+---
+export interface Props {
+	eyebrow: string;
+	title: string;
+	meta?: string;
+}
+
+const { eyebrow, title, meta } = Astro.props as Props;
+const segmentCount = 20;
+const segments = Array.from({ length: segmentCount }, (_, index) => (360 / segmentCount) * index);
+---
+
+<section class="dp-legal-hero">
+	<svg class="dp-legal-hero__rings" viewBox="0 0 400 400" fill="none" aria-hidden="true">
+		<g class="dp-legal-hero__spin" stroke="currentColor">
+			<circle cx="200" cy="200" r="190" stroke-width="2" />
+			<circle cx="200" cy="200" r="172" stroke-width="14" stroke-dasharray="27 27" />
+			{segments.map((angle) => <line x1="200" y1="60" x2="200" y2="110" stroke-width="1.5" transform={`rotate(${angle} 200 200)`} />)}
+		</g>
+		<g class="dp-legal-hero__spin dp-legal-hero__spin--reverse" stroke="currentColor">
+			<circle cx="200" cy="200" r="120" stroke-width="10" stroke-dasharray="18.85 18.85" />
+			<circle cx="200" cy="200" r="70" stroke-width="2" />
+		</g>
+		<circle class="dp-legal-hero__bull" cx="200" cy="200" r="16" fill="currentColor" />
+	</svg>
+	<div class="dp-legal-hero__inner">
+		<p class="dp-eyebrow" data-intro>{eyebrow}</p>
+		<h1 class="dp-legal-hero__title" data-intro style="--dp-delay: 80ms">{title}</h1>
+		{meta && <p class="dp-legal-hero__meta" data-intro style="--dp-delay: 160ms">{meta}</p>}
+	</div>
+</section>
