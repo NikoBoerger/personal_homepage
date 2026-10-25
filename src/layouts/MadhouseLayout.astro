@@ -1,0 +1,157 @@
+---
+import { Image } from 'astro:assets';
+import '../styles/madhouse.css';
+import { madhouse } from '../config/madhouse.js';
+import appIcon from '../assets/apps/madhouse/app_icon.png';
+
+export interface Props {
+	variant: 'home' | 'legal';
+	lang?: 'en' | 'de';
+	seo: {
+		title: string;
+		description: string;
+		robots?: string;
+		keywords?: string;
+		ogTitle?: string;
+		ogDescription?: string;
+	};
+	jsonLd?: Record<string, unknown>;
+}
+
+const { variant, lang = 'en', seo, jsonLd } = Astro.props as Props;
+
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+const ogImage = new URL(madhouse.ogImagePath, Astro.site).href;
+const currentPath = Astro.url.pathname;
+const year = new Date().getFullYear();
+const isHome = variant === 'home';
+const ogTitle = seo.ogTitle ?? seo.title;
+const ogDescription = seo.ogDescription ?? seo.description;
+const homeLink = isHome ? '#top' : madhouse.paths.home;
+const downloadLink = isHome ? '#download' : `${madhouse.paths.home}#download`;
+const ariaCurrent = (path: string) => (path === currentPath ? 'page' : undefined);
+---
+
+<html lang={lang}>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>{seo.title}</title>
+		<meta name="description" content={seo.description} />
+		{seo.keywords && <meta name="keywords" content={seo.keywords} />}
+		<meta name="robots" content={seo.robots ?? 'index, follow'} />
+		<meta name="theme-color" content={madhouse.themeColor} />
+		<link rel="canonical" href={canonical} />
+		<meta name="author" content="Niko Börger" />
+
+		<meta property="og:type" content="website" />
+		<meta property="og:site_name" content={madhouse.name} />
+		<meta property="og:locale" content={lang === 'de' ? 'de_DE' : 'en_US'} />
+		<meta property="og:url" content={canonical} />
+		<meta property="og:title" content={ogTitle} />
+		<meta property="og:description" content={ogDescription} />
+		<meta property="og:image" content={ogImage} />
+		<meta property="og:image:width" content="1200" />
+		<meta property="og:image:height" content="630" />
+		<meta property="og:image:alt" content="Madhouse darts scoring app on iPhone" />
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content={ogTitle} />
+		<meta name="twitter:description" content={ogDescription} />
+		<meta name="twitter:image" content={ogImage} />
+		{isHome && <meta name="apple-itunes-app" content={`app-id=${madhouse.appStoreId}`} />}
+
+		<link rel="icon" type="image/png" sizes="48x48" href="/assets/apps/madhouse/favicon-48.png" />
+		<link rel="apple-touch-icon" href="/assets/apps/madhouse/apple-touch-icon.png" />
+		<link rel="preload" href="/assets/apps/madhouse/fonts/Dosis-Bold.woff2" as="font" type="font/woff2" crossorigin />
+		<link rel="preload" href="/assets/apps/madhouse/fonts/Zexo.woff2" as="font" type="font/woff2" crossorigin />
+		<script is:inline>document.documentElement.classList.add('mh-js');</script>
+		{jsonLd && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
+		<slot name="head" />
+	</head>
+	<body>
+		<div id="top" class:list={['mh-root', isHome ? 'mh-root--home' : 'mh-root--legal']}>
+			<a class="mh-skip" href="#content">Skip to content</a>
+
+			<header class="mh-header">
+				<nav aria-label="Main" class="mh-nav">
+					<a href={homeLink} aria-label="Madhouse home" class="mh-brand">
+						<Image class="mh-brand__icon" src={appIcon} alt="" width={36} height={36} densities={[1, 2, 3]} loading="eager" />
+						<span class="mh-brand__name">MADHOUSE</span>
+					</a>
+					{
+						isHome ? (
+							<div class="mh-nav__links">
+								<a href={downloadLink} class="mh-pill">Download</a>
+								<a href="#screenshots" class="mh-nav__link">Screenshots</a>
+								<a href="#features" class="mh-nav__link">Features</a>
+							</div>
+						) : (
+							<a href={downloadLink} class="mh-pill">Download</a>
+						)
+					}
+				</nav>
+			</header>
+
+			<slot />
+
+			<footer class="mh-footer">
+				<div class="mh-footer__inner">
+					<div class="mh-footer__brand">
+						<span class="mh-footer__name">MADHOUSE</span>
+						<span class="mh-footer__copy">© {year} Madhouse</span>
+					</div>
+					<nav aria-label="Legal" class="mh-footer__links">
+						<a href={madhouse.paths.privacy} aria-current={ariaCurrent(madhouse.paths.privacy)}>Privacy Policy</a>
+						<a href={madhouse.paths.impressum} aria-current={ariaCurrent(madhouse.paths.impressum)}>Impressum</a>
+						<a href={madhouse.paths.impressum} data-mail-link>Support</a>
+					</nav>
+				</div>
+			</footer>
+		</div>
+
+		<script is:inline>
+			(function () {
+				var address = 'apps.' + 'nikoboerger' + '@' + 'gmail' + '.com';
+				document.querySelectorAll('[data-mail-link]').forEach(function (link) {
+					link.href = 'mailto:' + address;
+				});
+				document.querySelectorAll('[data-mail]').forEach(function (node) {
+					var link = document.createElement('a');
+					link.href = 'mailto:' + address;
+					link.textContent = address;
+					link.className = node.className;
+					node.replaceWith(link);
+				});
+
+				var header = document.querySelector('.mh-header');
+				var updateHeader = function () {
+					header.classList.toggle('is-scrolled', window.scrollY > 8);
+				};
+				updateHeader();
+				window.addEventListener('scroll', updateHeader, { passive: true });
+
+				var revealables = document.querySelectorAll('[data-reveal]');
+				var reveal = function (node) {
+					node.classList.add('is-visible');
+				};
+				if (!('IntersectionObserver' in window)) {
+					revealables.forEach(reveal);
+					return;
+				}
+				var observer = new IntersectionObserver(
+					function (entries) {
+						entries.forEach(function (entry) {
+							if (!entry.isIntersecting) return;
+							reveal(entry.target);
+							observer.unobserve(entry.target);
+						});
+					},
+					{ rootMargin: '0px 0px -8% 0px', threshold: 0.12 }
+				);
+				revealables.forEach(function (node) {
+					observer.observe(node);
+				});
+			})();
+		</script>
+	</body>
+</html>

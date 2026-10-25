@@ -26,16 +26,4 @@ export const apps = {
 			{ title: 'Impressum', href: '/apps/dartprotrainingsheet/impressum/' },
 		],
 	},
-	madhouse: {
-		name: 'Madhouse',
-		brandColor: '#137177',
-		brandColorDark: '#0A2F51',
-		faviconPath: '/assets/apps/madhouse/app_icon.png',
-		ogImagePath: '/assets/apps/madhouse/app_icon.png',
-		logoPath: '/assets/apps/madhouse/app_icon.png',
-		navLinks: [
-			{ title: 'Home', href: '/apps/madhouse/' },
-			{ title: 'Privacy Policy', href: '/apps/madhouse/privacy/' },
-		],
-	},
 };

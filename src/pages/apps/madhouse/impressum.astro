@@ -1,0 +1,70 @@
+---
+import MadhouseLayout from '../../../layouts/MadhouseLayout.astro';
+---
+
+<MadhouseLayout
+	variant="legal"
+	lang="de"
+	seo={{
+		title: 'Impressum – Madhouse Darts App',
+		description: 'Impressum und Anbieterkennzeichnung der Madhouse Darts App.',
+		robots: 'noindex, follow',
+	}}
+>
+	<main id="content" class="mh-legal">
+		<article class="mh-legal__article">
+			<div class="mh-legal__head" data-intro>
+				<p class="mh-eyebrow">Rechtliches</p>
+				<h1 class="mh-legal__title">Impressum</h1>
+			</div>
+
+			<div class="mh-legal__cards" data-reveal>
+				<section class="mh-legal__card">
+					<h2>Angaben gemäß § 5 DDG</h2>
+					<p>Niko Börger<br />Gottfried-Keller-Straße 9<br />22848 Norderstedt<br />Deutschland</p>
+				</section>
+				<section class="mh-legal__card">
+					<h2>Kontakt</h2>
+					<p>E-Mail: <span data-mail>[Please enable Javascript]</span><br />Telefon: <span data-phone>[Please enable Javascript]</span></p>
+				</section>
+			</div>
+
+			<section class="mh-legal__section" data-reveal>
+				<h2>Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV</h2>
+				<p>Niko Börger, Anschrift wie oben</p>
+			</section>
+
+			<section class="mh-legal__section" data-reveal>
+				<h2>Umsatzsteuer-ID</h2>
+				<p>Umsatzsteuer-Identifikationsnummer gemäß § 27 a Umsatzsteuergesetz: DE335605838</p>
+			</section>
+
+			<section class="mh-legal__section" data-reveal>
+				<h2>Verbraucherstreitbeilegung</h2>
+				<p>Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.</p>
+			</section>
+
+			<section class="mh-legal__section" data-reveal>
+				<h2>Haftung für Inhalte</h2>
+				<p>
+					Die Inhalte dieser Seite wurden mit größter Sorgfalt erstellt. Für die Richtigkeit, Vollständigkeit und
+					Aktualität der Inhalte kann jedoch keine Gewähr übernommen werden.
+				</p>
+			</section>
+
+			<section class="mh-legal__section" data-reveal>
+				<h2>Haftung für Links</h2>
+				<p>
+					Diese Seite enthält Links zu externen Websites Dritter, auf deren Inhalte wir keinen Einfluss haben. Für die
+					Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter oder Betreiber verantwortlich.
+				</p>
+			</section>
+		</article>
+	</main>
+
+	<script is:inline>
+		document.querySelectorAll('[data-phone]').forEach(function (node) {
+			node.textContent = '+49 ' + '174 ' + '6098501';
+		});
+	</script>
+</MadhouseLayout>

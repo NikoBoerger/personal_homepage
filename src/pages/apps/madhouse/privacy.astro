@@ -1,92 +1,172 @@
 ---
-import AppLayout from '../../../layouts/AppLayout.astro';
+import MadhouseLayout from '../../../layouts/MadhouseLayout.astro';
 ---
 
-<AppLayout
-	app="madhouse"
+<MadhouseLayout
+	variant="legal"
 	seo={{
-		title: 'Privacy Policy | Madhouse',
-		description: 'Privacy Policy for the Madhouse darts scoring app.',
+		title: 'Privacy Policy – Madhouse Darts App',
+		description:
+			'Privacy Policy of the Madhouse darts scoring app: what data is processed through Firebase Analytics and Firebase Crashlytics, how it is used and what rights you have.',
 	}}
 >
-	<h1>Privacy Policy</h1>
+	<main id="content" class="mh-legal">
+		<article class="mh-legal__article">
+			<div class="mh-legal__head" data-intro>
+				<p class="mh-eyebrow">Legal</p>
+				<h1 class="mh-legal__title">Privacy Policy</h1>
+				<p class="mh-legal__meta">Effective date: <strong>25.10.2026</strong></p>
+			</div>
+			<p class="mh-legal__intro">
+				<strong>Madhouse</strong> respects your privacy. This Privacy Policy explains what information is processed when
+				you use the Madhouse app on iPhone, iPad and Android, why it is processed, and which rights you have.
+			</p>
 
-	<section class="app-card">
-		<p class="app-muted">Effective date: <strong>06.09.2025</strong></p>
-		<p>
-			<strong>Madhouse</strong> respects your privacy. This Privacy Policy explains how we collect, use, and
-			protect information when you use our mobile application.
-		</p>
-	</section>
+			<section class="mh-legal__section" data-reveal>
+				<h2>Who Is Responsible</h2>
+				<p>The controller responsible for processing your personal data under the EU General Data Protection Regulation (GDPR) is:</p>
+				<p>Niko Börger<br />Gottfried-Keller-Straße 9<br />22848 Norderstedt<br />Germany</p>
+				<p>Email: <span data-mail>[Please enable Javascript]</span></p>
+			</section>
 
-	<section class="app-card">
-		<h2>Information We Collect</h2>
-		<p>
-			We use <strong>Firebase Analytics</strong>, a service provided by Google, to understand how our app is
-			used and to improve its performance and features. Firebase Analytics automatically collects certain
-			information, which may include:
-		</p>
-		<ul>
-			<li>Device information (e.g., model, operating system version)</li>
-			<li>App usage data (e.g., screens viewed, actions taken)</li>
-			<li>General location information (e.g., country, region)</li>
-		</ul>
-		<p>
-			We <strong>do not</strong> collect personally identifiable information such as your name, phone number, or
-			precise location.
-		</p>
-	</section>
+			<section class="mh-legal__section" data-reveal>
+				<h2>Data Stored on Your Device</h2>
+				<p>
+					Your players, matches, statistics and settings are stored <strong>only on your device</strong>. Madhouse has
+					no user accounts and no server of its own, so this data is never uploaded to us.
+				</p>
+				<p>
+					If you add a picture to a player, the app asks for access to your camera or photo library. The picture you
+					take or choose is stored only on your device. You can remove it at any time, and all app data is deleted when
+					you uninstall the app.
+				</p>
+			</section>
 
-	<section class="app-card">
-		<h2>How We Use the Information</h2>
-		<p>The information collected through Firebase Analytics is used solely for:</p>
-		<ul>
-			<li>Monitoring app performance</li>
-			<li>Improving the user experience</li>
-			<li>Understanding how users interact with the app</li>
-		</ul>
-		<p>We do not sell or share your data with third parties for marketing or advertising purposes.</p>
-	</section>
+			<section class="mh-legal__section" data-reveal>
+				<h2>Information We Collect</h2>
+				<p>
+					We use <strong>Firebase Analytics</strong>, a service provided by Google, to understand how our app is used
+					and to improve its performance and features. Firebase Analytics automatically collects certain information,
+					which may include:
+				</p>
+				<ul>
+					<li>Device information (e.g., model, operating system version, language)</li>
+					<li>App usage data (e.g., screens viewed, sessions, app version)</li>
+					<li>General location information (e.g., country, region), derived from your IP address</li>
+					<li>Online identifiers such as a randomly generated app instance ID and, where available, your device's advertising identifier</li>
+				</ul>
+				<p>
+					We also use <strong>Firebase Crashlytics</strong>, a service provided by Google, to find and fix crashes. If
+					the app crashes or runs into a serious error, a crash report is sent. It contains technical information such
+					as the error details, device model, operating system and app version, the state of the device at the time of
+					the crash, and a randomly generated installation ID.
+				</p>
+				<p>
+					We <strong>do not</strong> collect personally identifiable information such as your name, email address,
+					phone number, or precise location. Madhouse shows no ads and does not track you across other apps or
+					websites.
+				</p>
+			</section>
 
-	<section class="app-card">
-		<h2>Third-Party Services</h2>
-		<p>
-			Our app uses Firebase Analytics, which is provided by Google. For details about how Google handles data in
-			Firebase, please refer to Google's privacy documentation:
-		</p>
-		<p>
-			<a href="https://firebase.google.com/support/privacy" target="_blank" rel="noopener">
-				Google - Privacy &amp; Security in Firebase
-			</a>
-		</p>
-	</section>
+			<section class="mh-legal__section" data-reveal>
+				<h2>How We Use the Information</h2>
+				<p>The information collected through Firebase Analytics and Firebase Crashlytics is used solely for:</p>
+				<ul>
+					<li>Monitoring app performance and stability</li>
+					<li>Finding and fixing crashes and errors</li>
+					<li>Improving the user experience</li>
+					<li>Understanding how users interact with the app</li>
+				</ul>
+				<p>We do not sell or share your data with third parties for marketing or advertising purposes.</p>
+			</section>
 
-	<section class="app-card">
-		<h2>Data Retention</h2>
-		<p>
-			Analytics data is retained by Firebase according to Google’s policies. We do not store this analytics data
-			ourselves.
-		</p>
-	</section>
+			<section class="mh-legal__section" data-reveal>
+				<h2>Legal Basis</h2>
+				<p>
+					We process this data on the basis of our legitimate interest in providing a stable, error free app and in
+					improving it (Art. 6(1)(f) GDPR).
+				</p>
+			</section>
 
-	<section class="app-card">
-		<h2>Your Choices</h2>
-		<p>
-			You can opt out of Firebase Analytics data collection by following Google’s instructions for disabling
-			analytics or using relevant device settings. For more information and opt-out tools, see:
-		</p>
-		<p>
-			<a href="https://tools.google.com/dlpage/gaoptout/" target="_blank" rel="noopener">
-				Google Analytics Opt-out
-			</a>
-		</p>
-	</section>
+			<section class="mh-legal__section" data-reveal>
+				<h2>Third-Party Services</h2>
+				<p>
+					Our app uses Firebase Analytics and Firebase Crashlytics, which are provided by Google Ireland Limited, Gordon
+					House, Barrow Street, Dublin 4, Ireland, and Google LLC. For details about how Google handles data in
+					Firebase, please refer to Google's privacy documentation:
+				</p>
+				<p>
+					<a href="https://firebase.google.com/support/privacy" target="_blank" rel="noopener">Google - Privacy &amp; Security in Firebase →</a>
+				</p>
+			</section>
 
-	<section class="app-card">
-		<h2>Contact Us</h2>
-		<p>
-			If you have any questions or concerns about this Privacy Policy, please contact us at
-			<span class="app-mail">[Please enable Javascript]</span>.
-		</p>
-	</section>
-</AppLayout>
+			<section class="mh-legal__section" data-reveal>
+				<h2>International Data Transfers</h2>
+				<p>
+					Google may process data in the United States and other countries outside the European Economic Area. These
+					transfers are based on the EU-U.S. Data Privacy Framework, under which Google LLC is certified, and on the
+					European Commission's Standard Contractual Clauses.
+				</p>
+			</section>
+
+			<section class="mh-legal__section" data-reveal>
+				<h2>Data Retention</h2>
+				<p>
+					Analytics data is retained by Firebase according to Google's retention settings. Crashlytics keeps crash
+					reports and the associated identifiers for 90 days. We do not store this data ourselves.
+				</p>
+			</section>
+
+			<section class="mh-legal__section" data-reveal>
+				<h2>Your Choices</h2>
+				<p>
+					You can object to the processing at any time by contacting us. On Android, you can reset your advertising ID
+					or delete it in your device settings under Google, then Ads. On iOS, you can manage tracking under Settings,
+					then Privacy &amp; Security, then Tracking. Uninstalling the app stops all data collection.
+				</p>
+			</section>
+
+			<section class="mh-legal__section" data-reveal>
+				<h2>Your Rights</h2>
+				<p>Under the GDPR, you have the right to:</p>
+				<ul>
+					<li>access your personal data (Art. 15 GDPR)</li>
+					<li>have it corrected (Art. 16 GDPR)</li>
+					<li>have it deleted (Art. 17 GDPR)</li>
+					<li>restrict its processing (Art. 18 GDPR)</li>
+					<li>data portability (Art. 20 GDPR)</li>
+					<li>object to its processing (Art. 21 GDPR)</li>
+				</ul>
+				<p>
+					You also have the right to lodge a complaint with a data protection supervisory authority. The authority
+					responsible for us is the Unabhängiges Landeszentrum für Datenschutz Schleswig-Holstein (ULD), but you may
+					also contact the authority in your country of residence.
+				</p>
+			</section>
+
+			<section class="mh-legal__section" data-reveal>
+				<h2>Children's Privacy</h2>
+				<p>
+					Madhouse is a general audience app and is not directed at children. We do not knowingly collect personal data
+					from children.
+				</p>
+			</section>
+
+			<section class="mh-legal__section" data-reveal>
+				<h2>Changes to This Privacy Policy</h2>
+				<p>
+					We may update this Privacy Policy from time to time. The current version is always available on this page,
+					and the effective date above shows when it was last changed.
+				</p>
+			</section>
+
+			<section class="mh-legal__section" data-reveal>
+				<h2>Contact Us</h2>
+				<p>
+					If you have any questions or concerns about this Privacy Policy, please contact us at:
+					<span data-mail class="mh-mail--strong">[Please enable Javascript]</span>
+				</p>
+			</section>
+		</article>
+	</main>
+</MadhouseLayout>

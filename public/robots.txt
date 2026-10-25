@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://niko-boerger.com/sitemap-index.xml
